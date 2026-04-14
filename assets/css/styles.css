@@ -30,7 +30,39 @@
   --section-pad-y: 86px;
   --header-h: 74px;
 }
+/* Luxury Design Foundation */
+:root {
+    --primary-color: #1a1a1a;
+    --bg-color: #fdfdfd; /* Off-white feels more premium */
+    --accent-color: #7d7d7d;
+    --serif-font: 'Cormorant Garamond', serif;
+    --sans-font: 'Inter', -apple-system, sans-serif;
+}
 
+body {
+    font-family: var(--sans-font);
+    line-height: 1.8;
+    color: var(--primary-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Gallery-Style Headings */
+h1, h2, h3 {
+    font-family: var(--serif-font);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+/* Professional Container Spacing */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5vw; /* Fluid padding for better mobile experience */
+}
 *{ box-sizing: border-box; }
 html, body{ height: 100%; }
 body{
