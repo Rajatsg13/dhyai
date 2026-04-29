@@ -8,7 +8,7 @@
   <link rel="icon" href="/assets/images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <script>document.documentElement.dataset.theme=localStorage.getItem('dhyai_theme')||'';</script>
 </head>
@@ -18,7 +18,7 @@
     <a class="brand" href="/index.html" aria-label="DHYAI Home">
       <img src="/assets/images/logo.png" alt="DHYAI" />
     </a>
-    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <nav id="primary-nav" class="nav" data-nav>
       <a href="/index.html" data-nav-link>Home</a>
       <a href="/about.html" data-nav-link>About</a>
@@ -40,6 +40,17 @@
 </section>
 </div>
 <footer class="site-footer">
+  <div class="footer-nav-row">
+  <div class="container">
+    <nav aria-label="Footer navigation" class="footer-nav">
+      <a href="/index.html">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/process.html">Process</a>
+      <a href="/studies.html">Studies</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+  </div>
   <div class="footer-inner">
     <div class="footer-icons" aria-label="Social links">
       <a class="icon-link" href="https://www.instagram.com/dhyai.studio?utm_source=qr&igsh=MWV6eGwzeGV1N2owYQ==" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true">

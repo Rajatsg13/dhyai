@@ -13,7 +13,15 @@
   var themeToggle = document.createElement('div');
   themeToggle.className = 'theme-toggle';
   themeToggle.setAttribute('aria-label', 'Switch colour theme');
-  [['', '#e2dccf', 'Warm'], ['white', '#ffffff', 'White']].forEach(function(opt) {
+  [
+    ['',       '#e2dccf', 'Warm'],
+    ['white',  '#ffffff', 'White'],
+    ['ivory',  '#f5f0e8', 'Ivory'],
+    ['stone',  '#d2cec8', 'Stone'],
+    ['blush',  '#ece0db', 'Blush'],
+    ['sage',   '#d6dcd3', 'Sage'],
+    ['slate',  '#d4d8dc', 'Slate'],
+  ].forEach(function(opt) {
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'theme-swatch' + (savedTheme === opt[0] ? ' is-active' : '');
@@ -38,6 +46,20 @@
     navToggle.addEventListener('click', () => {
       const open = nav.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (nav.classList.contains('is-open') && !e.target.closest('.site-header')) {
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 

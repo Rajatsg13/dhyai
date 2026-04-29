@@ -13,11 +13,11 @@
   --text-2:     #5a544c;
   --divider:    #cfc6b8;
 
-  --font-heading: "EB Garamond", Georgia, serif;
+  --font-heading: "Cormorant", Georgia, serif;
   --font-body:    "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  --hero-title: 62px;
-  --h2:         28px;
+  --hero-title: clamp(36px, 5.5vw, 62px);
+  --h2:         clamp(22px, 2.4vw, 28px);
   --body:       15px;
   --meta:       13px;
   --lh:         1.7;
@@ -66,7 +66,9 @@ a {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
-  background: var(--bg-primary);
+  background: rgba(226, 220, 207, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--divider);
   z-index: 1000;
 }
@@ -96,14 +98,39 @@ a {
 
 .nav-toggle {
   display: none;
-  font: 400 var(--meta)/1 var(--font-body);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
   background: transparent;
   border: 0;
-  padding: 10px 12px;
-  color: var(--text);
+  padding: 6px 4px;
   cursor: pointer;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
 }
 
 .nav {
@@ -139,13 +166,15 @@ a {
   }
 
   .brand img { height: 20px; }
-  .nav-toggle { display: inline-flex; }
+  .nav-toggle { display: flex; }
 
   .nav {
     position: absolute;
     top: var(--header-h);
     left: 0; right: 0;
-    background: var(--bg-primary);
+    background: rgba(226, 220, 207, 0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--divider);
     display: none;
     flex-direction: column;
@@ -203,6 +232,7 @@ h1 {
   font-size: var(--hero-title);
   line-height: 1.05;
   letter-spacing: -0.01em;
+  font-weight: 300;
   color: var(--text);
   margin-bottom: 20px;
 }
@@ -250,14 +280,6 @@ p:last-child {
   color: var(--text-2);
 }
 
-@media (max-width: 860px) {
-  :root {
-    --hero-title: 38px;
-    --h2: 23px;
-  }
-
-  h1 { margin-bottom: 14px; }
-}
 
 /* ─── Hero ────────────────────────────────────────────────────────────────── */
 
@@ -335,14 +357,20 @@ p:last-child {
 
 /* ─── Study tiles ─────────────────────────────────────────────────────────── */
 
+.study-tile {
+  display: block;
+  overflow: hidden;
+}
+
 .study-tile img {
   width: 100%;
   height: auto;
-  transition: opacity 0.4s ease;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
 }
 
 .study-tile:hover img {
-  opacity: 0.86;
+  transform: scale(1.04);
+  opacity: 0.88;
 }
 
 .study-tile h3 {
@@ -566,14 +594,36 @@ small {
 
 .site-footer {
   border-top: 1px solid var(--divider);
-  padding: 40px 0 52px;
   background: var(--bg-primary);
+}
+
+.footer-nav-row {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  font: 400 var(--meta)/1 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--text);
 }
 
 .footer-inner {
   max-width: var(--max-page);
   margin: 0 auto;
-  padding: 0 var(--pad-x);
+  padding: 32px var(--pad-x) 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -623,10 +673,15 @@ small {
 }
 
 @media (max-width: 760px) {
+  .footer-nav {
+    gap: 16px;
+  }
+
   .footer-inner {
     flex-direction: column-reverse;
     align-items: flex-start;
     gap: 20px;
+    padding-bottom: 36px;
   }
 }
 
@@ -638,6 +693,10 @@ small {
   --divider:    #e5e5e5;
 }
 
+[data-theme="white"] .site-header {
+  background: rgba(255, 255, 255, 0.82);
+}
+
 [data-theme="white"] .hero-media::after {
   background: linear-gradient(
     to top,
@@ -646,6 +705,12 @@ small {
     rgba(255, 255, 255, 0.15) 72%,
     rgba(255, 255, 255, 0.00) 100%
   );
+}
+
+@media (max-width: 860px) {
+  [data-theme="white"] .nav {
+    background: rgba(255, 255, 255, 0.96);
+  }
 }
 
 /* ─── Theme toggle ─────────────────────────────────────────────────────────── */
@@ -781,4 +846,164 @@ small {
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Staggered children for grid reveals */
+.grid-3.reveal > *,
+.grid-2.reveal > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grid-3.is-visible > *:nth-child(1),
+.grid-2.is-visible > *:nth-child(1) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.1s;
+}
+
+.grid-3.is-visible > *:nth-child(2),
+.grid-2.is-visible > *:nth-child(2) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.2s;
+}
+
+.grid-3.is-visible > *:nth-child(3),
+.grid-2.is-visible > *:nth-child(3) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.3s;
+}
+
+/* ─── Theme: Ivory ─────────────────────────────────────────────────────────── */
+
+[data-theme="ivory"] {
+  --bg-primary: #f5f0e8;
+  --bg-alt:     #ede8de;
+  --divider:    #e0d9cc;
+}
+
+[data-theme="ivory"] .site-header {
+  background: rgba(245, 240, 232, 0.82);
+}
+
+[data-theme="ivory"] .hero-media::after {
+  background: linear-gradient(
+    to top,
+    rgba(245, 240, 232, 0.94) 0%,
+    rgba(245, 240, 232, 0.55) 42%,
+    rgba(245, 240, 232, 0.15) 72%,
+    rgba(245, 240, 232, 0.00) 100%
+  );
+}
+
+/* ─── Theme: Stone ─────────────────────────────────────────────────────────── */
+
+[data-theme="stone"] {
+  --bg-primary: #d2cec8;
+  --bg-alt:     #c8c4be;
+  --divider:    #b8b4ae;
+  --accent:     #7a5a18;
+  --hover-accent: #8a6420;
+}
+
+[data-theme="stone"] .site-header {
+  background: rgba(210, 206, 200, 0.82);
+}
+
+[data-theme="stone"] .hero-media::after {
+  background: linear-gradient(
+    to top,
+    rgba(210, 206, 200, 0.94) 0%,
+    rgba(210, 206, 200, 0.55) 42%,
+    rgba(210, 206, 200, 0.15) 72%,
+    rgba(210, 206, 200, 0.00) 100%
+  );
+}
+
+/* ─── Theme: Blush ─────────────────────────────────────────────────────────── */
+
+[data-theme="blush"] {
+  --bg-primary: #ece0db;
+  --bg-alt:     #e2d4ce;
+  --divider:    #d4c4bc;
+  --accent:     #8b5a52;
+  --hover-accent: #9b6258;
+}
+
+[data-theme="blush"] .site-header {
+  background: rgba(236, 224, 219, 0.82);
+}
+
+[data-theme="blush"] .hero-media::after {
+  background: linear-gradient(
+    to top,
+    rgba(236, 224, 219, 0.94) 0%,
+    rgba(236, 224, 219, 0.55) 42%,
+    rgba(236, 224, 219, 0.15) 72%,
+    rgba(236, 224, 219, 0.00) 100%
+  );
+}
+
+/* ─── Theme: Sage ──────────────────────────────────────────────────────────── */
+
+[data-theme="sage"] {
+  --bg-primary: #d6dcd3;
+  --bg-alt:     #cbd1c8;
+  --divider:    #b8bfb5;
+  --accent:     #4a6b56;
+  --hover-accent: #557a62;
+}
+
+[data-theme="sage"] .site-header {
+  background: rgba(214, 220, 211, 0.82);
+}
+
+[data-theme="sage"] .hero-media::after {
+  background: linear-gradient(
+    to top,
+    rgba(214, 220, 211, 0.94) 0%,
+    rgba(214, 220, 211, 0.55) 42%,
+    rgba(214, 220, 211, 0.15) 72%,
+    rgba(214, 220, 211, 0.00) 100%
+  );
+}
+
+/* ─── Theme: Slate ─────────────────────────────────────────────────────────── */
+
+[data-theme="slate"] {
+  --bg-primary: #d4d8dc;
+  --bg-alt:     #c8cdd2;
+  --divider:    #b8bec4;
+  --accent:     #3d5a6a;
+  --hover-accent: #456578;
+  --text:       #252a2f;
+  --text-2:     #484e56;
+}
+
+[data-theme="slate"] .site-header {
+  background: rgba(212, 216, 220, 0.82);
+}
+
+[data-theme="slate"] .hero-media::after {
+  background: linear-gradient(
+    to top,
+    rgba(212, 216, 220, 0.94) 0%,
+    rgba(212, 216, 220, 0.55) 42%,
+    rgba(212, 216, 220, 0.15) 72%,
+    rgba(212, 216, 220, 0.00) 100%
+  );
+}
+
+/* ─── Mobile nav backgrounds for new themes ───────────────────────────────── */
+
+@media (max-width: 860px) {
+  [data-theme="ivory"] .nav { background: rgba(245, 240, 232, 0.96); }
+  [data-theme="stone"] .nav { background: rgba(210, 206, 200, 0.96); }
+  [data-theme="blush"] .nav { background: rgba(236, 224, 219, 0.96); }
+  [data-theme="sage"]  .nav { background: rgba(214, 220, 211, 0.96); }
+  [data-theme="slate"] .nav { background: rgba(212, 216, 220, 0.96); }
 }

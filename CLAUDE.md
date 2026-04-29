@@ -46,13 +46,18 @@ All styles are in `assets/css/styles.css`. There are two `:root` blocks — the 
 - `--font-heading: "EB Garamond"`, `--font-body: "Inter"`
 - Layout is single-column sections with `.grid-2` / `.grid-3` helpers; no cards, no boxed UI — images sit directly on background
 
+The white colour theme overrides `--bg-primary` and related tokens via `[data-theme="white"]` on `<html>`.
+
 ## JavaScript
 
-`assets/js/main.js` (vanilla, IIFE) handles three things:
-1. Mobile nav toggle (`[data-nav-toggle]` / `[data-nav]`)
-2. Active nav link highlighting via `aria-current="page"` (matched by current pathname)
-3. Scroll-reveal via `IntersectionObserver` — add `.reveal` class to any element; `.is-visible` is added when it enters the viewport
+`assets/js/main.js` (vanilla, IIFE) handles five things:
+
+1. **Theme toggle** — injects colour-swatch buttons into `.header-inner`; persists choice to `localStorage('dhyai_theme')`. Two themes: `''` (warm, default) and `'white'`. Every page also has an inline `<script>` in `<head>` that applies the saved theme before render to prevent FOUC.
+2. **Mobile nav toggle** — `[data-nav-toggle]` / `[data-nav]`; toggles `.is-open` and `aria-expanded`.
+3. **Active nav highlighting** — matches `location.pathname` against `[data-nav-link]` and `[data-subnav-link]` href attributes; sets `aria-current="page"`.
+4. **Cookie consent banner** — injected once if `localStorage('dhyai_cookie_consent')` is absent; dismissed to `'all'` or `'essential'`.
+5. **Scroll-reveal** — `IntersectionObserver` on `.reveal` elements; adds `.is-visible` at 12% threshold. Falls back to immediate `.is-visible` if `IntersectionObserver` is unsupported.
 
 ## Pages
 
-Each HTML page is self-contained with its own `<head>`. The three study pages (`sthna.html`, `sthiti.html`, `punar.html`) share the same section structure: cover image → description → format grid. `overview.html` is a quick-links review page, not linked in the main nav.
+Each HTML page is self-contained with its own `<head>`. The three study pages (`sthna.html`, `sthiti.html`, `punar.html`) share the same section structure: cover image → description → format grid. `overview.html` is a quick-links review page, not linked in the main nav. `404.html` is served via `.htaccess` (`ErrorDocument 404 /404.html`).
