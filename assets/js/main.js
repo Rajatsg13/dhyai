@@ -37,11 +37,14 @@
     });
     themeToggle.appendChild(btn);
   });
-  var headerInner = document.querySelector('.header-inner');
-  if (headerInner) headerInner.appendChild(themeToggle);
-
   const navToggle = document.querySelector('[data-nav-toggle]');
   const nav = document.querySelector('[data-nav]');
+  if (nav) nav.appendChild(themeToggle);
+  else {
+    var headerInner = document.querySelector('.header-inner');
+    if (headerInner) headerInner.appendChild(themeToggle);
+  }
+
   if(navToggle && nav){
     navToggle.addEventListener('click', () => {
       const open = nav.classList.toggle('is-open');

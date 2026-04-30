@@ -43,7 +43,7 @@ For a manual upload, copy the entire folder contents (not the folder itself) int
 All styles are in `assets/css/styles.css`. There are two `:root` blocks — the first defines the canonical design tokens (colors, typography, spacing), the second is a leftover "luxury design" block that partially duplicates them. The canonical tokens are:
 
 - `--bg-primary: #e2dccf`, `--bg-alt: #d8d0c2`, `--accent: #9e6821`
-- `--font-heading: "EB Garamond"`, `--font-body: "Inter"`
+- `--font-heading: "Cormorant"` (weight 300 for h1, 400 for h2/h3), `--font-body: "Inter"`
 - Layout is single-column sections with `.grid-2` / `.grid-3` helpers; no cards, no boxed UI — images sit directly on background
 
 The white colour theme overrides `--bg-primary` and related tokens via `[data-theme="white"]` on `<html>`.
@@ -52,7 +52,7 @@ The white colour theme overrides `--bg-primary` and related tokens via `[data-th
 
 `assets/js/main.js` (vanilla, IIFE) handles five things:
 
-1. **Theme toggle** — injects colour-swatch buttons into `.header-inner`; persists choice to `localStorage('dhyai_theme')`. Two themes: `''` (warm, default) and `'white'`. Every page also has an inline `<script>` in `<head>` that applies the saved theme before render to prevent FOUC.
+1. **Theme toggle** — injects colour-swatch buttons into `[data-nav]` (the nav element), so they appear in the nav bar on desktop and at the bottom of the mobile dropdown. Seven themes: `''` (warm), `'white'`, `'ivory'`, `'stone'`, `'blush'`, `'sage'`, `'slate'`. Persists choice to `localStorage('dhyai_theme')`. Every page also has an inline `<script>` in `<head>` that applies the saved theme before render to prevent FOUC.
 2. **Mobile nav toggle** — `[data-nav-toggle]` / `[data-nav]`; toggles `.is-open` and `aria-expanded`.
 3. **Active nav highlighting** — matches `location.pathname` against `[data-nav-link]` and `[data-subnav-link]` href attributes; sets `aria-current="page"`.
 4. **Cookie consent banner** — injected once if `localStorage('dhyai_cookie_consent')` is absent; dismissed to `'all'` or `'essential'`.
