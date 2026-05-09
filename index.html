@@ -6,21 +6,23 @@
 <meta name="description" content="Dhyai develops objects for long-term use. Block-printed textiles and hand-cast brass from Bengaluru, made to order.">
 <meta property="og:title" content="Dhyai">
 <meta property="og:description" content="Objects developed for use, handling, and retention.">
-<meta name="theme-color" content="#1D1914">
+<meta name="theme-color" content="#0f0c08">
 <link rel="icon" href="assets/images/favicon.png">
 <title>Dhyai — Craft Studio, Bengaluru</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Display:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant:ital,wght@0,300;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
+/* ── Palette: moody ink ground + cream ivory surface ── */
 :root {
-  --ink:    #1D1914;
-  --ink-2:  #0f0c08;
-  --warm:   #2d2010;
-  --cream:  #EDE3CC;
-  --dim:    #9A9080;
-  --faint:  #6a5e52;
-  --ochre:  #C4882A;
+  --ink:    #1D1914;   /* warm near-black — body base */
+  --ink-2:  #0a0806;   /* deep black — hero, footer, video beds */
+  --warm:   #221508;   /* dark amber — section accent gradient */
+  --cream:  #EDE3CC;   /* warm off-white — primary text */
+  --ivory:  #f0e8d6;   /* brightest surface — pull quotes, highlights */
+  --dim:    #9A9080;   /* muted warm grey — secondary text */
+  --faint:  #6a5e52;   /* dark warm grey — tertiary text */
+  --ochre:  #C4882A;   /* amber — kickers, accents, links */
   --serif:  'Cormorant Display', Georgia, serif;
   --serif-b:'Cormorant', Georgia, serif;
   --sans:   'Jost', sans-serif;
@@ -30,7 +32,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--ink);
+  background: var(--ink-2);
   color: var(--cream);
   font-family: var(--sans);
   font-weight: 300;
@@ -40,8 +42,7 @@ body {
 
 body::before {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   z-index: 9000;
   pointer-events: none;
   opacity: .10;
@@ -52,8 +53,7 @@ body::before {
 
 /* ── Entry ── */
 #entry {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   z-index: 5000;
   overflow: hidden;
   display: flex;
@@ -61,75 +61,56 @@ body::before {
   justify-content: center;
   transition: opacity 1.6s ease;
 }
-
 .bg-jaali {
-  position: absolute;
-  inset: 0;
-  background: url('assets/images/hero_jali_shadow.jpg') center / cover no-repeat;
+  position: absolute; inset: 0;
+  background: url('assets/images/jaali.webp') center / cover no-repeat;
   opacity: 0;
   transform: scale(1.04);
   transition: opacity 1.4s ease, transform 1.6s ease;
   will-change: transform;
 }
-#entry[data-s="0"] .bg-jaali { opacity: .28; transform: scale(1.03); }
-#entry[data-s="1"] .bg-jaali { opacity: .48; transform: scale(1.01); }
-#entry[data-s="2"] .bg-jaali { opacity: .68; transform: scale(1.00); }
-#entry[data-s="3"] .bg-jaali { opacity: .14; transform: scale(1.05); }
+#entry[data-s="0"] .bg-jaali { opacity: .25; transform: scale(1.03); }
+#entry[data-s="1"] .bg-jaali { opacity: .44; transform: scale(1.01); }
+#entry[data-s="2"] .bg-jaali { opacity: .62; transform: scale(1.00); }
+#entry[data-s="3"] .bg-jaali { opacity: .12; transform: scale(1.05); }
 
 .bg-veil {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(15,12,8,.25) 0%, rgba(15,12,8,.92) 100%);
-  opacity: 1;
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(10,8,6,.28) 0%, rgba(10,8,6,.94) 100%);
   transition: opacity 1.4s ease;
 }
-#entry[data-s="0"] .bg-veil { opacity: .92; }
-#entry[data-s="1"] .bg-veil { opacity: .80; }
-#entry[data-s="2"] .bg-veil { opacity: .68; }
-#entry[data-s="3"] .bg-veil { opacity: .94; }
+#entry[data-s="0"] .bg-veil { opacity: .94; }
+#entry[data-s="1"] .bg-veil { opacity: .82; }
+#entry[data-s="2"] .bg-veil { opacity: .70; }
+#entry[data-s="3"] .bg-veil { opacity: .96; }
 
 .es {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   gap: 1.4rem;
-  opacity: 0;
-  transition: opacity 1.5s ease;
+  opacity: 0; transition: opacity 1.5s ease;
   z-index: 2;
 }
 .es.on { opacity: 1; }
-
 .e-text {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(1.35rem, 2.8vw, 2.2rem);
-  line-height: 1.55;
-  color: var(--cream);
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(1.05rem, 2vw, 1.7rem);
+  line-height: 1.6; color: var(--cream);
   text-align: center;
   padding: 0 clamp(1.5rem, 6vw, 4rem);
-  max-width: 36ch;
+  max-width: 34ch;
 }
-
 .e-wm {
-  height: clamp(36px, 8vw, 54px);
-  display: block;
-  opacity: 0;
-  transform: scale(.985);
+  height: clamp(32px, 7vw, 48px); display: block;
+  opacity: 0; transform: scale(.985);
   transition: opacity 1.4s ease .65s, transform 1.4s ease .65s;
 }
 .es.on .e-wm { opacity: 1; transform: scale(1); }
-
 .e-late {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(.9rem, 1.4vw, 1.1rem);
-  color: var(--dim);
-  opacity: 0;
-  transition: opacity 1.2s ease 1.5s;
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: clamp(.82rem, 1.2vw, 1rem);
+  color: var(--dim); opacity: 0; transition: opacity 1.2s ease 1.5s;
 }
 .es.on .e-late { opacity: 1; }
 
@@ -138,87 +119,59 @@ body::before {
 
 /* ── Nav ── */
 #nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  position: fixed; top: 0; left: 0; right: 0;
   z-index: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
-  background: linear-gradient(180deg, rgba(15,12,8,.95) 0%, rgba(15,12,8,.5) 60%, transparent 100%);
-  opacity: 0;
-  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,8,6,.97) 0%, rgba(10,8,6,.55) 65%, transparent 100%);
+  opacity: 0; pointer-events: none;
   transition: opacity .6s ease;
 }
 #nav.on { opacity: 1; pointer-events: auto; }
-
-.nav-brand img { height: 24px; display: block; cursor: pointer; }
-
+.nav-brand img { height: 22px; display: block; cursor: pointer; }
 .nav-links { display: flex; gap: 1.6rem; align-items: center; }
 .nav-links a,
 .nav-links button {
-  font-family: var(--sans);
-  font-size: .62rem;
-  font-weight: 300;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--dim);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color .3s;
-  text-decoration: none;
+  font-family: var(--sans); font-size: .6rem; font-weight: 300;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--dim); background: none; border: none;
+  cursor: pointer; transition: color .3s; text-decoration: none;
 }
-.nav-links a:hover,
-.nav-links button:hover { color: var(--ochre); }
-
+.nav-links a:hover, .nav-links button:hover { color: var(--ochre); }
 @media (max-width: 480px) {
-  .nav-brand img { height: 20px; }
-  .nav-links { gap: 1.1rem; }
-  .nav-links a, .nav-links button { font-size: .54rem; letter-spacing: .2em; }
+  .nav-brand img { height: 18px; }
+  .nav-links { gap: .9rem; }
+  .nav-links a, .nav-links button { font-size: .5rem; letter-spacing: .18em; }
 }
 
 /* ── Sub-nav ── */
 .sub-nav {
-  position: fixed;
-  top: 3.8rem;
-  left: 0; right: 0;
+  position: fixed; top: 3.6rem; left: 0; right: 0;
   z-index: 400;
-  background: rgba(15,12,8,.97);
-  justify-content: center;
-  gap: 2.4rem;
-  padding: .7rem 0;
+  background: rgba(10,8,6,.98);
+  justify-content: center; gap: 2.4rem;
+  padding: .65rem 0;
   border-bottom: 1px solid rgba(237,227,204,.05);
 }
 .sub-nav button {
   position: relative;
-  font-family: var(--sans);
-  font-size: .6rem;
-  font-weight: 300;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--dim);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: .4rem 1.6rem;
-  transition: color .3s;
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--dim); background: none; border: none;
+  cursor: pointer; padding: .4rem 1.6rem; transition: color .3s;
 }
 .sub-nav button.on { color: var(--ochre); }
 .sub-nav button::after {
   content: '';
-  position: absolute;
-  bottom: 0;
+  position: absolute; bottom: 0;
   left: 50%; right: 50%;
-  height: 1px;
-  background: var(--ochre);
+  height: 1px; background: var(--ochre);
   transition: left .35s var(--ease), right .35s var(--ease);
 }
 .sub-nav button.on::after { left: 1.6rem; right: 1.6rem; }
-
 @media (max-width: 480px) {
-  .sub-nav { gap: 1rem; }
-  .sub-nav button { font-size: .54rem; padding: .35rem 1rem; letter-spacing: .2em; }
+  .sub-nav { gap: .8rem; }
+  .sub-nav button { font-size: .52rem; padding: .3rem .8rem; letter-spacing: .18em; }
 }
 
 /* ── Pages ── */
@@ -227,510 +180,350 @@ body::before {
 
 /* ── Kickers ── */
 .kicker {
-  font-family: var(--sans);
-  font-size: .58rem;
-  font-weight: 300;
-  letter-spacing: .36em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: .9rem;
+  font-family: var(--sans); font-size: .56rem; font-weight: 300;
+  letter-spacing: .36em; text-transform: uppercase;
+  color: var(--ochre); margin-bottom: .9rem;
 }
 .sp-kicker {
-  font-family: var(--sans);
-  font-size: .56rem;
-  font-weight: 300;
-  letter-spacing: .38em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  margin-bottom: .8rem;
+  font-family: var(--sans); font-size: .54rem; font-weight: 300;
+  letter-spacing: .38em; text-transform: uppercase;
+  color: var(--ochre); margin-bottom: .8rem;
 }
 
-/* ── Hero ── */
+/* ── Hero — full-screen video ── */
 .hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(180deg, var(--ink-2) 0%, var(--ink) 100%);
-  padding-top: clamp(5rem, 11vw, 8rem);
-  padding-bottom: clamp(4rem, 8vw, 6rem);
-}
-
-.hero-frame {
   position: relative;
-  width: 100%;
-  max-width: 500px;
-  aspect-ratio: 9 / 16;
-  background: var(--ink-2);
+  width: 100%; height: 100svh;
   overflow: hidden;
-  box-shadow: 0 40px 140px rgba(0,0,0,.65);
+  background: var(--ink-2);
 }
-.hero-frame::before {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: -1px;
-  height: 50%;
-  background: linear-gradient(0deg, rgba(10,7,4,.94) 0%, rgba(10,7,4,.3) 55%, transparent 100%);
-  z-index: 3;
-  pointer-events: none;
+.hero video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; z-index: 1;
 }
-
-.hero-frame video,
-.kriya-frame video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
+.hero-veil {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(
+    0deg,
+    rgba(10,8,6,.92) 0%,
+    rgba(10,8,6,.35) 40%,
+    rgba(10,8,6,.10) 70%,
+    transparent 100%
+  );
 }
-
 .hero-text {
   position: absolute;
-  bottom: clamp(1.8rem, 5%, 3rem);
-  left: clamp(1.5rem, 5%, 2.5rem);
-  z-index: 4;
-  max-width: 86%;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(1.5rem, 3.5vw, 2.8rem);
-  line-height: 1.15;
-  color: var(--cream);
-  text-shadow: 0 2px 24px rgba(0,0,0,.7);
+  bottom: clamp(3rem, 8%, 5.5rem);
+  left: clamp(1.5rem, 6vw, 5rem);
+  z-index: 4; max-width: 80%;
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(1.1rem, 2.4vw, 2rem);
+  line-height: 1.2; color: var(--cream);
+  text-shadow: 0 2px 28px rgba(0,0,0,.8);
 }
-
 .play-btn {
-  position: absolute;
-  inset: 0;
-  margin: auto;
+  position: absolute; inset: 0; margin: auto;
   width: 64px; height: 64px;
   background: none; border: none; cursor: pointer;
-  z-index: 5;
-  opacity: 0; pointer-events: none;
+  z-index: 5; opacity: 0; pointer-events: none;
   transition: opacity .4s;
 }
 .show-play .play-btn { opacity: 1; pointer-events: auto; }
 
-/* ── Kriya ── */
+/* ── Kriya — full-bleed video ── */
 .kriya {
   background: linear-gradient(180deg,
-    var(--ink) 0%, var(--warm) 15%, #352510 35%,
-    #352510 65%, var(--warm) 85%, var(--ink) 100%
+    var(--ink-2) 0%, var(--warm) 20%,
+    #1e1409 45%, #1e1409 55%,
+    var(--warm) 80%, var(--ink-2) 100%
   );
-  padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 4vw, 4rem);
-}
-.kriya-inner {
-  max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(2rem, 4vw, 3.5rem);
 }
 .kriya-frame {
   position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: var(--ink-2);
-  overflow: hidden;
-  box-shadow: 0 30px 100px rgba(0,0,0,.55);
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--ink-2); overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.6);
+}
+.kriya-frame video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; z-index: 1;
+}
+.kriya-body {
+  padding: clamp(3rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 4rem);
 }
 .kriya-text {
-  text-align: center;
-  max-width: 44ch;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  max-width: 56ch;
+  display: flex; flex-direction: column; gap: 1.1rem;
+  text-align: left;
 }
-.kt1 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.65rem, 3vw, 2.6rem); color: var(--cream); }
-.kt2 { font-family: var(--serif); font-weight: 300; font-size: clamp(.98rem, 1.4vw, 1.2rem); color: var(--dim); }
-.kt3 { font-family: var(--sans); font-weight: 300; font-size: clamp(.82rem, 1vw, .96rem); color: var(--dim); }
-.kt4 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.2rem, 2vw, 1.8rem); font-style: italic; color: var(--cream); }
+.kt1 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.2rem, 2.2vw, 1.9rem); color: var(--cream); }
+.kt2 { font-family: var(--serif); font-weight: 300; font-size: clamp(.9rem, 1.2vw, 1.08rem); color: var(--dim); }
+.kt3 { font-family: var(--sans); font-weight: 300; font-size: clamp(.78rem, .95vw, .92rem); color: var(--dim); }
+.kt4 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.05rem, 1.7vw, 1.55rem); font-style: italic; color: var(--cream); }
 
 /* ── Sections ── */
-.section { padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 4vw, 4rem); }
-
+.section { padding: clamp(4.5rem, 9vw, 7rem) clamp(1.5rem, 4vw, 4rem); }
 .sec-head {
   max-width: 1400px;
-  margin: 0 auto clamp(3rem, 5vw, 5rem);
+  margin: 0 auto clamp(2.5rem, 4.5vw, 4.5rem);
 }
 .sec-head h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(2.5rem, 5vw, 4.2rem);
-  line-height: .92;
-  color: var(--cream);
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: .92; color: var(--cream);
 }
 .s {
-  font-family: var(--serif);
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
-  color: var(--ochre);
-  margin-top: .3rem;
+  font-family: var(--serif); font-size: clamp(.9rem, 1.2vw, 1.1rem);
+  color: var(--ochre); margin-top: .3rem;
 }
 .sec-desc {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(.95rem, 1.2vw, 1.15rem);
-  line-height: 1.7;
-  color: var(--dim);
-  max-width: 58ch;
-  margin-top: .8rem;
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(.88rem, 1.1vw, 1.05rem);
+  line-height: 1.72; color: var(--dim);
+  max-width: 58ch; margin-top: .8rem;
 }
 
-/* ── Textile ── */
+/* ── Textile sections ── */
 .textile {
   background: linear-gradient(180deg,
-    var(--ink) 0%, #2b1e0d 20%, #281b0b 50%,
-    #281b0b 80%, #2b1e0d 90%, var(--ink) 100%
+    var(--ink-2) 0%, #1e1409 18%,
+    #1a1108 50%, #1a1108 82%,
+    #1e1409 92%, var(--ink-2) 100%
   );
 }
 
-/* ── Metal ── */
+/* ── Metal section ── */
 .metal {
   background: linear-gradient(180deg,
-    var(--ink) 0%, #0d0b07 20%, #0c0a06 50%,
-    #0c0a06 80%, var(--ink) 100%
+    var(--ink-2) 0%, #0d0b08 20%,
+    #0b0907 50%, #0b0907 80%,
+    var(--ink-2) 100%
   );
 }
-.metal .sec-head { margin-bottom: clamp(2rem, 3vw, 3rem); }
+.metal .sec-head { margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem); }
 .metal h3 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  line-height: 1;
-  color: var(--cream);
-  margin-top: .4rem;
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
+  line-height: 1; color: var(--cream); margin-top: .4rem;
 }
 .metal-prod {
   max-width: 1400px;
-  margin: 0 auto clamp(4rem, 8vw, 7rem);
+  margin: 0 auto clamp(3.5rem, 7vw, 6rem);
 }
 .metal-prod:last-child { margin-bottom: 0; }
 .metal-prod .prod { max-width: 520px; }
 
 /* ── Products grid ── */
 .products {
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 1400px; margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
-  gap: clamp(2rem, 4vw, 3rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: clamp(2rem, 3.5vw, 2.8rem);
 }
 
 /* ── Carousel ── */
 .carousel-wrap { position: relative; overflow: hidden; }
 .carousel {
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-x: auto; scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  cursor: grab;
-  user-select: none;
+  scrollbar-width: none; cursor: grab; user-select: none;
 }
 .carousel::-webkit-scrollbar { display: none; }
 .carousel.dragging { cursor: grabbing; }
-
 .slide {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
+  flex: 0 0 100%; scroll-snap-align: start;
+  aspect-ratio: 4 / 3; overflow: hidden;
 }
 .slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block; pointer-events: none;
 }
-.metal .slide { background: #0c0a07; }
-.metal .slide img { object-fit: contain; }
+/* Metal: keep same 4:3 ratio, cover crop */
+.metal .slide { background: var(--ink-2); }
 
 .slide-ph {
-  width: 100%;
-  height: 100%;
-  background: #0c0a07;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%; height: 100%; background: var(--ink-2);
+  display: flex; align-items: center; justify-content: center;
 }
 .slide-ph span {
-  font-family: var(--sans);
-  font-size: .52rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--faint);
+  font-family: var(--sans); font-size: .5rem;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--faint);
 }
 
 .prod-dots {
-  display: flex;
-  justify-content: center;
-  gap: .5rem;
-  padding: .9rem 0 .4rem;
+  display: flex; justify-content: center;
+  gap: .5rem; padding: .85rem 0 .35rem;
 }
 .dot {
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--faint);
-  transition: background .3s;
-  flex-shrink: 0;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--faint); transition: background .3s; flex-shrink: 0;
 }
 .dot.on { background: var(--ochre); }
 
 /* ── Product caption ── */
 .prod-cap {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding-top: 1rem;
-  gap: 1rem;
+  display: flex; justify-content: space-between;
+  align-items: flex-end; padding-top: .9rem; gap: 1rem;
 }
 .prod-label {
-  font-family: var(--sans);
-  font-size: .52rem;
-  font-weight: 400;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--ochre);
+  font-family: var(--sans); font-size: .5rem; font-weight: 400;
+  letter-spacing: .3em; text-transform: uppercase; color: var(--ochre);
 }
 .prod-name {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-  color: var(--cream);
-  line-height: 1;
-  margin-top: .3rem;
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.2rem, 2vw, 1.85rem);
+  color: var(--cream); line-height: 1; margin-top: .3rem;
 }
 .prod-specs {
-  font-family: var(--sans);
-  font-size: clamp(.75rem, .88vw, .88rem);
-  font-weight: 300;
-  color: var(--dim);
-  letter-spacing: .025em;
-  margin-top: .4rem;
+  font-family: var(--sans); font-size: clamp(.7rem, .82vw, .82rem);
+  font-weight: 300; color: var(--dim);
+  letter-spacing: .025em; margin-top: .35rem;
 }
 .prod-mto {
-  font-family: var(--serif-b);
-  font-size: clamp(.72rem, .85vw, .85rem);
-  font-style: italic;
-  color: var(--faint);
-  margin-top: .25rem;
+  font-family: var(--serif-b); font-size: clamp(.68rem, .8vw, .8rem);
+  font-style: italic; color: var(--faint); margin-top: .22rem;
 }
 .enq {
-  font-family: var(--sans);
-  font-size: .6rem;
-  font-weight: 300;
-  letter-spacing: .26em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  background: none;
-  border: none;
+  font-family: var(--sans); font-size: .58rem; font-weight: 300;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--ochre); background: none; border: none;
   border-bottom: 1px solid var(--ochre);
-  cursor: pointer;
-  padding-bottom: 2px;
-  white-space: nowrap;
-  transition: opacity .3s;
-  align-self: flex-end;
-  flex-shrink: 0;
+  cursor: pointer; padding-bottom: 2px;
+  white-space: nowrap; transition: opacity .3s;
+  align-self: flex-end; flex-shrink: 0;
 }
 .enq:hover { opacity: .7; }
 
 /* ── Main footer ── */
 .main-footer {
   background: var(--ink-2);
-  border-top: 1px solid rgba(237,227,204,.055);
-  padding: clamp(3.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem) 3rem;
+  border-top: 1px solid rgba(237,227,204,.05);
+  padding: clamp(3rem, 5.5vw, 4.5rem) clamp(1.5rem, 4vw, 4rem) 2.5rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.8rem;
+  display: flex; flex-direction: column; align-items: center; gap: 1.6rem;
 }
-.ft-links {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
+.ft-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+.ft-links a, .ft-links button {
+  font-family: var(--sans); font-size: .6rem; font-weight: 300;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--dim); background: none; border: none;
+  cursor: pointer; text-decoration: none; transition: color .3s;
 }
-.ft-links a,
-.ft-links button {
-  font-family: var(--sans);
-  font-size: .62rem;
-  font-weight: 300;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--dim);
-  background: none; border: none; cursor: pointer;
-  text-decoration: none;
-  transition: color .3s;
-}
-.ft-links a:hover,
-.ft-links button:hover { color: var(--ochre); }
-.ft-copy { font-family: var(--sans); font-size: .66rem; letter-spacing: .06em; color: var(--faint); }
+.ft-links a:hover, .ft-links button:hover { color: var(--ochre); }
+.ft-copy { font-family: var(--sans); font-size: .64rem; letter-spacing: .06em; color: var(--faint); }
 
 /* ── Sub-pages ── */
-.sp { display: none; min-height: 100svh; background: var(--ink); }
-
+.sp { display: none; min-height: 100svh; background: var(--ink-2); }
 .sp-inner {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: clamp(7rem, 12vw, 10rem) clamp(1.5rem, 4vw, 4rem) clamp(4rem, 8vw, 6rem);
+  max-width: 780px; margin: 0 auto;
+  padding: clamp(7rem, 11vw, 9.5rem) clamp(1.5rem, 4vw, 4rem) clamp(3.5rem, 7vw, 5.5rem);
 }
 .sp-h1 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  line-height: .88;
-  color: var(--cream);
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  line-height: .88; color: var(--cream);
 }
 .sp-h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(2.6rem, 5vw, 4.5rem);
-  line-height: .92;
-  color: var(--cream);
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.9rem, 3.5vw, 3.2rem);
+  line-height: .92; color: var(--cream);
 }
 .sp-large {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
-  color: var(--cream);
-  margin-top: 1.4rem;
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  color: var(--ivory); margin-top: 1.4rem;
 }
 .sp-body p {
-  font-family: var(--serif-b);
-  font-weight: 300;
-  font-size: clamp(1.05rem, 1.45vw, 1.28rem);
-  line-height: 1.82;
-  color: var(--dim);
-  margin-top: 1.4rem;
+  font-family: var(--serif-b); font-weight: 300;
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.82; color: var(--dim); margin-top: 1.3rem;
 }
 .sp-pull {
-  border-left: 1px solid rgba(196,136,42,.3);
-  padding-left: 1.4rem;
-  margin-top: 2.4rem;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
-  line-height: 1.45;
-  color: var(--cream);
+  border-left: 1px solid rgba(196,136,42,.35);
+  padding-left: 1.4rem; margin-top: 2.4rem;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(.95rem, 1.3vw, 1.15rem);
+  line-height: 1.5; color: var(--ivory);
 }
 
 /* Contact */
 .sp-note {
-  font-family: var(--serif-b);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(.98rem, 1.3vw, 1.15rem);
-  line-height: 1.72;
-  color: var(--dim);
-  margin: 1.2rem 0 2.4rem;
-  max-width: 50ch;
+  font-family: var(--serif-b); font-style: italic; font-weight: 300;
+  font-size: clamp(.92rem, 1.2vw, 1.08rem);
+  line-height: 1.72; color: var(--dim);
+  margin: 1.1rem 0 2.2rem; max-width: 50ch;
 }
 .ci-list { list-style: none; border-top: 1px solid rgba(237,227,204,.06); }
 .ci {
-  display: grid;
-  grid-template-columns: 7rem 1fr;
-  gap: 1.2rem;
-  padding: 1.4rem 0;
-  border-bottom: 1px solid rgba(237,227,204,.06);
-  align-items: start;
+  display: grid; grid-template-columns: 7rem 1fr;
+  gap: 1.2rem; padding: 1.3rem 0;
+  border-bottom: 1px solid rgba(237,227,204,.06); align-items: start;
 }
-@media (max-width: 500px) { .ci { grid-template-columns: 1fr; gap: .4rem; } }
+@media (max-width: 500px) { .ci { grid-template-columns: 1fr; gap: .35rem; } }
 .ci-label {
-  font-family: var(--sans);
-  font-size: .58rem;
-  font-weight: 300;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--ochre);
-  padding-top: .15rem;
+  font-family: var(--sans); font-size: .56rem; font-weight: 300;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ochre); padding-top: .15rem;
 }
 .ci-val a {
-  font-family: var(--serif);
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
-  color: var(--cream);
-  text-decoration: none;
-  display: block;
+  font-family: var(--serif); font-size: clamp(.95rem, 1.3vw, 1.12rem);
+  color: var(--cream); text-decoration: none; display: block;
 }
 .ci-val a:hover { color: var(--ochre); }
 .ci-val p {
-  font-family: var(--serif-b);
-  font-style: italic;
-  font-size: clamp(.82rem, 1vw, .98rem);
-  color: var(--dim);
-  margin-top: .3rem;
+  font-family: var(--serif-b); font-style: italic;
+  font-size: clamp(.78rem, .95vw, .92rem);
+  color: var(--dim); margin-top: .3rem;
 }
 
-/* Founder */
+/* ── Founder — photo with left overlay ── */
 .fo-wrap {
-  position: relative;
-  width: 100%;
-  height: 100svh;
-  overflow: hidden;
-  background: #1a1510;
+  position: relative; width: 100%; height: 100svh;
+  overflow: hidden; background: var(--ink-2);
 }
-.fo-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #1a1208 0%, #0c0a06 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.fo-placeholder span {
-  font-family: var(--sans);
-  font-size: .58rem;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--faint);
+.fo-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 60% center; display: block;
 }
 .fo-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 48%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: absolute; top: 0; left: 0;
+  width: 52%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center;
   padding: clamp(3rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem);
-  background: linear-gradient(90deg, rgba(237,227,204,.12) 0%, transparent 100%);
+  background: linear-gradient(90deg,
+    rgba(10,8,6,.88) 0%,
+    rgba(10,8,6,.70) 40%,
+    rgba(10,8,6,.30) 70%,
+    transparent 100%
+  );
   overflow-y: auto;
 }
 .fo-name {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(2rem, 3.2vw, 3.4rem);
-  line-height: .92;
-  color: var(--cream); /* placeholder: cream; swap to var(--ink) when real portrait is added */
-  margin-top: .6rem;
-  margin-bottom: .8rem;
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+  line-height: .92; color: var(--cream); margin-top: .6rem; margin-bottom: .9rem;
 }
 .fo-stanzas p {
-  font-family: var(--serif-b);
-  font-weight: 300;
-  font-size: clamp(.78rem, 1vw, .98rem);
-  line-height: 1.88;
-  color: var(--cream); /* placeholder: cream; swap to var(--ink) for light-wall portrait */
-  margin-top: 1rem;
+  font-family: var(--serif-b); font-weight: 300;
+  font-size: clamp(.76rem, .95vw, .94rem);
+  line-height: 1.88; color: var(--cream); margin-top: .9rem;
 }
 .fo-em { font-style: italic; }
 .fo-sep { letter-spacing: .1em; margin-top: 1.4rem !important; }
 .fo-closing { font-style: italic; color: var(--dim) !important; }
 
+/* Founder mobile */
 .fo-mobile {
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
-  background: var(--ink);
+  background: var(--ink-2);
 }
 .fo-mobile p {
-  font-family: var(--serif-b);
-  font-weight: 300;
-  font-size: clamp(.85rem, 1.1vw, 1rem);
-  line-height: 1.88;
-  color: var(--cream);
-  margin-top: 1rem;
+  font-family: var(--serif-b); font-weight: 300;
+  font-size: clamp(.82rem, 1.05vw, .98rem);
+  line-height: 1.88; color: var(--cream); margin-top: .9rem;
 }
 .fo-mobile .fo-em { font-style: italic; }
 .fo-mobile .fo-sep { letter-spacing: .1em; margin-top: 1.4rem !important; color: var(--dim); }
@@ -748,27 +541,20 @@ body::before {
   background: var(--ink-2);
   border-top: 1px solid rgba(237,227,204,.05);
   padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 4rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.4rem;
+  display: flex; flex-direction: column; align-items: center; gap: 1.3rem;
   text-align: center;
 }
 .sp-back {
-  font-family: var(--sans);
-  font-size: .6rem;
-  letter-spacing: .24em;
-  text-transform: uppercase;
-  color: var(--dim);
-  background: none; border: none; cursor: pointer;
-  transition: color .3s;
+  font-family: var(--sans); font-size: .58rem;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--dim); background: none; border: none;
+  cursor: pointer; transition: color .3s;
 }
 .sp-back:hover { color: var(--ochre); }
 
 /* ── Scroll reveal ── */
 .js .reveal {
-  opacity: 0;
-  transform: translateY(14px);
+  opacity: 0; transform: translateY(14px);
   transition: opacity .95s var(--ease), transform 1.1s var(--ease);
 }
 .js .reveal.on { opacity: 1; transform: translateY(0); }
@@ -780,7 +566,6 @@ body::before {
 <div id="entry">
   <div class="bg-jaali"></div>
   <div class="bg-veil"></div>
-
   <div class="es" data-hold="2400">
     <p class="e-text">Before the mind reaches for a word,<br>Something settles.</p>
   </div>
@@ -791,7 +576,7 @@ body::before {
     <p class="e-text">A stone from a riverbed<br>sits on a shelf for years.<br>It belongs. It stays.</p>
   </div>
   <div class="es" data-hold="3600">
-    <img class="e-wm" src="assets/images/logo.png" alt="Dhyai">
+    <img class="e-wm" src="assets/images/wordmark.png" alt="Dhyai">
     <p class="e-text e-late">Craft Studio, Bengaluru</p>
   </div>
 </div>
@@ -801,7 +586,7 @@ body::before {
 
   <nav id="nav">
     <div class="nav-brand">
-      <img src="assets/images/logo.png" height="24" alt="Dhyai" onclick="showMain()">
+      <img src="assets/images/wordmark.png" height="22" alt="Dhyai" onclick="showMain()">
     </div>
     <div class="nav-links">
       <a onclick="showMain();setTimeout(function(){document.getElementById('sec-textiles').scrollIntoView({behavior:'smooth'})},50)">Textiles</a>
@@ -814,27 +599,30 @@ body::before {
   <!-- ══ MAIN PAGE ══ -->
   <div id="pg-main" class="pg active">
 
-    <!-- Hero -->
-    <section class="hero reveal">
-      <div class="hero-frame" id="heroFrame">
-        <video id="brickVid" src="assets/brick.mp4" muted playsinline webkit-playsinline autoplay loop preload="auto"></video>
-        <h1 class="hero-text">Objects are containers of time.</h1>
-        <button class="play-btn" id="brickPlay" aria-label="Play video">
-          <svg viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="30" fill="rgba(15,12,8,.88)" stroke="#EDE3CC" stroke-width="1.2"/><path d="M26 21 L26 43 L45 32 Z" fill="#EDE3CC"/></svg>
-        </button>
-      </div>
+    <!-- Hero — full-screen portrait video -->
+    <section class="hero reveal" id="heroFrame">
+      <video id="brickVid" src="assets/brick.mp4"
+        poster="assets/images/brick_poster.webp"
+        muted playsinline webkit-playsinline autoplay loop preload="auto"></video>
+      <div class="hero-veil"></div>
+      <h1 class="hero-text">Objects are containers of time.</h1>
+      <button class="play-btn" id="brickPlay" aria-label="Play video">
+        <svg viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="30" fill="rgba(10,8,6,.88)" stroke="#EDE3CC" stroke-width="1.2"/><path d="M26 21 L26 43 L45 32 Z" fill="#EDE3CC"/></svg>
+      </button>
     </section>
 
-    <!-- Kriya -->
-    <section class="section kriya reveal">
-      <div class="kriya-inner">
+    <!-- Kriya — full-bleed video, left-aligned text -->
+    <section class="section kriya reveal" style="padding:0">
+      <div class="kriya-frame" id="kriyaFrame">
+        <video id="kriyaVid" src="assets/kriya.mp4"
+          poster="assets/images/kriya_poster.webp"
+          muted playsinline webkit-playsinline autoplay loop preload="auto"></video>
+        <button class="play-btn" id="kriyaPlay" aria-label="Play video">
+          <svg viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="30" fill="rgba(10,8,6,.88)" stroke="#EDE3CC" stroke-width="1.2"/><path d="M26 21 L26 43 L45 32 Z" fill="#EDE3CC"/></svg>
+        </button>
+      </div>
+      <div class="kriya-body">
         <p class="kicker">Kriya</p>
-        <div class="kriya-frame" id="kriyaFrame">
-          <video id="kriyaVid" src="assets/kriya.mp4" muted playsinline webkit-playsinline autoplay loop preload="auto"></video>
-          <button class="play-btn" id="kriyaPlay" aria-label="Play video">
-            <svg viewBox="0 0 64 64" width="64" height="64"><circle cx="32" cy="32" r="30" fill="rgba(15,12,8,.88)" stroke="#EDE3CC" stroke-width="1.2"/><path d="M26 21 L26 43 L45 32 Z" fill="#EDE3CC"/></svg>
-          </button>
-        </div>
         <div class="kriya-text">
           <p class="kt1">Material is never neutral.</p>
           <p class="kt2">Every surface carries the record of what it went through to arrive.</p>
@@ -860,9 +648,9 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/sthiti_format_bedsheet.jpg" alt="Sthiti Bedsheet"></div>
-              <div class="slide"><img src="assets/images/sthiti_preview.jpg" alt="Sthiti detail"></div>
-              <div class="slide"><img src="assets/images/sthiti_surface_full.jpg" alt="Sthiti surface"></div>
+              <div class="slide"><img src="assets/images/sthiti_bs_1.webp" alt="Sthiti Bedsheet"></div>
+              <div class="slide"><img src="assets/images/sthiti_bs_2.webp" alt="Sthiti Bedsheet detail"></div>
+              <div class="slide"><img src="assets/images/sthiti_bs_3.webp" alt="Sthiti Bedsheet fold"></div>
             </div>
             <div class="prod-dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
           </div>
@@ -880,9 +668,9 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/sthiti_format_dohar.jpg" alt="Sthiti Dohar"></div>
-              <div class="slide"><img src="assets/images/sthiti_cover.jpg" alt="Sthiti cover"></div>
-              <div class="slide"><img src="assets/images/sthiti_surface_full.jpg" alt="Sthiti surface"></div>
+              <div class="slide"><img src="assets/images/sthiti_dohar_1.webp" alt="Sthiti Dohar"></div>
+              <div class="slide"><img src="assets/images/sthiti_dohar_2.webp" alt="Sthiti Dohar detail"></div>
+              <div class="slide"><img src="assets/images/sthiti_dohar_3.webp" alt="Sthiti Dohar fold"></div>
             </div>
             <div class="prod-dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
           </div>
@@ -900,9 +688,9 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/sthiti_format_bedcover.jpg" alt="Sthiti Bedcover"></div>
-              <div class="slide"><img src="assets/images/sthiti_preview.jpg" alt="Sthiti detail"></div>
-              <div class="slide"><img src="assets/images/sthiti_cover.jpg" alt="Sthiti collection"></div>
+              <div class="slide"><img src="assets/images/sthiti_bc_1.webp" alt="Sthiti Bedcover"></div>
+              <div class="slide"><img src="assets/images/sthiti_bc_2.webp" alt="Sthiti Bedcover detail"></div>
+              <div class="slide"><img src="assets/images/sthiti_bc_3.webp" alt="Sthiti Bedcover fold"></div>
             </div>
             <div class="prod-dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
           </div>
@@ -920,7 +708,7 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/sthiti_format_tablecover.jpg" alt="Sthiti Table Cover"></div>
+              <div class="slide"><img src="assets/images/sthiti_tc.webp" alt="Sthiti Table Cover"></div>
             </div>
           </div>
           <div class="prod-cap">
@@ -951,8 +739,8 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/sthna_format_dohar.jpg" alt="Sthana Dohar"></div>
-              <div class="slide"><img src="assets/images/sthna_surface_full.jpg" alt="Sthana surface"></div>
+              <div class="slide"><img src="assets/images/sthana_dohar_1.webp" alt="Sthana Dohar"></div>
+              <div class="slide"><img src="assets/images/sthana_dohar_2.webp" alt="Sthana Dohar detail"></div>
             </div>
             <div class="prod-dots"><span class="dot on"></span><span class="dot"></span></div>
           </div>
@@ -970,7 +758,7 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/sthna_format_bedcover.jpg" alt="Sthana Bedcover"></div>
+              <div class="slide"><img src="assets/images/sthana_bc.webp" alt="Sthana Bedcover"></div>
             </div>
           </div>
           <div class="prod-cap">
@@ -987,7 +775,7 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/sthna_format_tablelinen.jpg" alt="Sthana Table Linen"></div>
+              <div class="slide"><img src="assets/images/sthana_tl.webp" alt="Sthana Table Linen"></div>
             </div>
           </div>
           <div class="prod-cap">
@@ -1018,7 +806,7 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/punar_format_dohar.jpg" alt="Punar Dohar"></div>
+              <div class="slide"><img src="assets/images/punar_dohar.webp" alt="Punar Dohar"></div>
             </div>
           </div>
           <div class="prod-cap">
@@ -1035,7 +823,7 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><img src="assets/images/punar_format_bedsheet.jpg" alt="Punar Bedsheet"></div>
+              <div class="slide"><img src="assets/images/punar_bs.webp" alt="Punar Bedsheet"></div>
             </div>
           </div>
           <div class="prod-cap">
@@ -1067,9 +855,9 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><div class="slide-ph"><span>Image coming soon</span></div></div>
-              <div class="slide"><div class="slide-ph"><span>Image coming soon</span></div></div>
-              <div class="slide"><div class="slide-ph"><span>Image coming soon</span></div></div>
+              <div class="slide"><img src="assets/images/js01_1.webp" alt="Pebble Jar Set"></div>
+              <div class="slide"><img src="assets/images/js01_2.webp" alt="Pebble Jar Set detail"></div>
+              <div class="slide"><img src="assets/images/js01_3.webp" alt="Pebble Jar Set tray"></div>
             </div>
             <div class="prod-dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
           </div>
@@ -1092,9 +880,9 @@ body::before {
         <div class="prod">
           <div class="carousel-wrap">
             <div class="carousel">
-              <div class="slide"><div class="slide-ph"><span>Image coming soon</span></div></div>
-              <div class="slide"><div class="slide-ph"><span>Image coming soon</span></div></div>
-              <div class="slide"><div class="slide-ph"><span>Image coming soon</span></div></div>
+              <div class="slide"><img src="assets/images/kalash_1.webp" alt="Kalash"></div>
+              <div class="slide"><img src="assets/images/kalash_2.webp" alt="Kalash detail"></div>
+              <div class="slide"><img src="assets/images/kalash_3.webp" alt="Kalash shoulder"></div>
             </div>
             <div class="prod-dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
           </div>
@@ -1113,7 +901,7 @@ body::before {
     </section>
 
     <footer class="main-footer">
-      <img src="assets/images/logo.png" height="28" alt="Dhyai">
+      <img src="assets/images/wordmark.png" height="26" alt="Dhyai">
       <div class="ft-links">
         <button onclick="showSub('about')">About</button>
         <button onclick="showSub('founder')">Founder</button>
@@ -1150,7 +938,7 @@ body::before {
         <blockquote class="sp-pull">Objects are developed for use, handling, and retention. They enter gradually, settle over time, and remain without requiring explanation.</blockquote>
       </div>
       <footer class="sp-footer">
-        <img src="assets/images/logo.png" height="26" alt="Dhyai" onclick="showMain()" style="cursor:pointer">
+        <img src="assets/images/wordmark.png" height="24" alt="Dhyai" onclick="showMain()" style="cursor:pointer">
         <button class="sp-back" onclick="showMain()">← Back to collections</button>
         <p class="ft-copy">© MMXXVI Dhyai Studio</p>
       </footer>
@@ -1159,7 +947,7 @@ body::before {
     <!-- Founder -->
     <div id="sp-founder" class="sp">
       <div class="fo-wrap">
-        <div class="fo-placeholder"><span>Portrait coming soon</span></div>
+        <img class="fo-img" src="assets/images/founder.webp" alt="Swarna">
         <div class="fo-overlay">
           <p class="sp-kicker">Founder</p>
           <h2 class="fo-name">Swarna</h2>
@@ -1190,7 +978,7 @@ body::before {
         <p class="fo-closing"><em>Not everything asks to be understood.<br>Some things are meant to stay.</em></p>
       </div>
       <footer class="sp-footer">
-        <img src="assets/images/logo.png" height="26" alt="Dhyai" onclick="showMain()" style="cursor:pointer">
+        <img src="assets/images/wordmark.png" height="24" alt="Dhyai" onclick="showMain()" style="cursor:pointer">
         <button class="sp-back" onclick="showMain()">← Back to collections</button>
         <p class="ft-copy">© MMXXVI Dhyai Studio</p>
       </footer>
@@ -1206,7 +994,7 @@ body::before {
           <li class="ci">
             <span class="ci-label">Email</span>
             <div class="ci-val">
-              <a href="mailto:hello@dhyai.studio">hello@dhyai.studio</a>
+              <a href="mailto:contact@dhyai.studio">contact@dhyai.studio</a>
               <p>Orders, commissions, general enquiries</p>
             </div>
           </li>
@@ -1234,148 +1022,99 @@ body::before {
         </ul>
       </div>
       <footer class="sp-footer">
-        <img src="assets/images/logo.png" height="26" alt="Dhyai" onclick="showMain()" style="cursor:pointer">
+        <img src="assets/images/wordmark.png" height="24" alt="Dhyai" onclick="showMain()" style="cursor:pointer">
         <button class="sp-back" onclick="showMain()">← Back to collections</button>
         <p class="ft-copy">© MMXXVI Dhyai Studio</p>
       </footer>
     </div>
 
   </div><!-- /#pg-sub -->
-
 </div><!-- /#world -->
 
 <script>
 // ── 1. Entry animation ─────────────────────────────────────────────────────
 (function(){
-  var entry   = document.getElementById('entry');
-  var world   = document.getElementById('world');
-  var nav     = document.getElementById('nav');
-  var screens = document.querySelectorAll('.es');
-  var FADE    = 820;
-  var i       = 0;
-
-  function show(idx){
-    entry.setAttribute('data-s', idx);
-    screens[idx].classList.add('on');
-  }
-
+  var entry=document.getElementById('entry'),world=document.getElementById('world'),
+      nav=document.getElementById('nav'),screens=document.querySelectorAll('.es'),
+      FADE=820,i=0;
+  function show(idx){ entry.setAttribute('data-s',idx); screens[idx].classList.add('on'); }
   function next(){
-    if(i >= screens.length){
-      entry.style.transition    = 'opacity 1.6s ease';
-      entry.style.opacity       = '0';
-      entry.style.pointerEvents = 'none';
-      setTimeout(function(){ entry.style.display = 'none'; }, 1700);
-      world.style.transition = 'opacity 1.8s ease';
-      world.style.opacity    = '1';
+    if(i>=screens.length){
+      entry.style.transition='opacity 1.6s ease';
+      entry.style.opacity='0'; entry.style.pointerEvents='none';
+      setTimeout(function(){ entry.style.display='none'; },1700);
+      world.style.transition='opacity 1.8s ease'; world.style.opacity='1';
       nav.classList.add('on');
       return;
     }
     show(i);
-    var hold = parseInt(screens[i].getAttribute('data-hold')) || 2500;
-    if(i === screens.length - 1){
-      i++;
-      setTimeout(next, hold);
-    } else {
-      setTimeout(function(){
-        screens[i].classList.remove('on');
-        i++;
-        setTimeout(next, FADE);
-      }, hold);
-    }
+    var hold=parseInt(screens[i].getAttribute('data-hold'))||2500;
+    if(i===screens.length-1){ i++; setTimeout(next,hold); }
+    else { setTimeout(function(){ screens[i].classList.remove('on'); i++; setTimeout(next,FADE); },hold); }
   }
-
-  setTimeout(next, 320);
+  setTimeout(next,320);
 })();
 
 // ── 2. Video autoplay ──────────────────────────────────────────────────────
 (function(){
-  function setup(vidId, frameId, btnId){
-    var vid   = document.getElementById(vidId);
-    var frame = document.getElementById(frameId);
-    var btn   = document.getElementById(btnId);
+  function setup(vidId,frameId,btnId){
+    var vid=document.getElementById(vidId),frame=document.getElementById(frameId),
+        btn=document.getElementById(btnId);
     if(!vid) return;
-
     function live(){ frame.classList.add('live'); frame.classList.remove('show-play'); }
     function tryPlay(){ vid.play().then(live).catch(function(){ frame.classList.add('show-play'); }); }
-
     tryPlay();
-    setTimeout(function(){ if(!frame.classList.contains('live')) tryPlay(); }, 500);
-    if(btn) btn.addEventListener('click', function(){ vid.play().then(live); });
+    setTimeout(function(){ if(!frame.classList.contains('live')) tryPlay(); },500);
+    if(btn) btn.addEventListener('click',function(){ vid.play().then(live); });
   }
-
-  setup('brickVid',  'heroFrame',  'brickPlay');
-  setup('kriyaVid',  'kriyaFrame', 'kriyaPlay');
+  setup('brickVid','heroFrame','brickPlay');
+  setup('kriyaVid','kriyaFrame','kriyaPlay');
 })();
 
 // ── 3. Page switcher ───────────────────────────────────────────────────────
-var currentSub = null;
-
+var currentSub=null;
 function showMain(){
   document.getElementById('pg-main').classList.add('active');
   document.getElementById('pg-sub').classList.remove('active');
-  document.getElementById('subNav').style.display = 'none';
-  window.scrollTo(0, 0);
-  currentSub = null;
+  document.getElementById('subNav').style.display='none';
+  window.scrollTo(0,0); currentSub=null;
 }
-
 function showSub(name){
   document.getElementById('pg-main').classList.remove('active');
   document.getElementById('pg-sub').classList.add('active');
-  document.getElementById('subNav').style.display = 'flex';
+  document.getElementById('subNav').style.display='flex';
   ['about','founder','contact'].forEach(function(n){
-    var el = document.getElementById('sp-' + n);
-    if(el) el.style.display = (n === name) ? 'block' : 'none';
+    var el=document.getElementById('sp-'+n);
+    if(el) el.style.display=(n===name)?'block':'none';
   });
   document.querySelectorAll('#subNav button').forEach(function(btn){
-    btn.classList.toggle('on', btn.getAttribute('data-sub') === name);
+    btn.classList.toggle('on',btn.getAttribute('data-sub')===name);
   });
-  window.scrollTo(0, 0);
-  currentSub = name;
+  window.scrollTo(0,0); currentSub=name;
 }
 
 // ── 4. Carousels ───────────────────────────────────────────────────────────
 (function(){
   document.querySelectorAll('.carousel').forEach(function(c){
-    var slides = Array.from(c.querySelectorAll('.slide'));
-    var n = slides.length;
-    if(n <= 1) return;
-
+    var slides=Array.from(c.querySelectorAll('.slide')),n=slides.length;
+    if(n<=1) return;
     slides.forEach(function(s){ c.appendChild(s.cloneNode(true)); });
-
-    var prodEl = c.closest('.prod') || c.closest('.metal-prod');
-    var dots   = prodEl ? Array.from(prodEl.querySelectorAll('.prod-dots .dot')) : [];
-    var SPEED  = 0.38;
-    var paused = false;
-    var drag   = false;
-    var dX, dL;
-
-    c.addEventListener('touchstart',  function(){ paused = true;  }, {passive:true});
-    c.addEventListener('touchend',    function(){ paused = false; }, {passive:true});
-    c.addEventListener('touchcancel', function(){ paused = false; }, {passive:true});
-
-    c.addEventListener('mousedown', function(e){
-      drag = true; paused = true;
-      dX = e.pageX; dL = c.scrollLeft;
-      c.classList.add('dragging');
-    });
-    window.addEventListener('mouseup', function(){
-      if(!drag) return;
-      drag = false; paused = false;
-      c.classList.remove('dragging');
-    });
-    window.addEventListener('mousemove', function(e){
-      if(!drag) return;
-      e.preventDefault();
-      c.scrollLeft = dL - (e.pageX - dX);
-    });
-
+    var prodEl=c.closest('.prod')||c.closest('.metal-prod');
+    var dots=prodEl?Array.from(prodEl.querySelectorAll('.prod-dots .dot')):[];
+    var SPEED=0.38,paused=false,drag=false,dX,dL;
+    c.addEventListener('touchstart',function(){ paused=true; },{passive:true});
+    c.addEventListener('touchend',function(){ paused=false; },{passive:true});
+    c.addEventListener('touchcancel',function(){ paused=false; },{passive:true});
+    c.addEventListener('mousedown',function(e){ drag=true; paused=true; dX=e.pageX; dL=c.scrollLeft; c.classList.add('dragging'); });
+    window.addEventListener('mouseup',function(){ if(!drag) return; drag=false; paused=false; c.classList.remove('dragging'); });
+    window.addEventListener('mousemove',function(e){ if(!drag) return; e.preventDefault(); c.scrollLeft=dL-(e.pageX-dX); });
     (function tick(){
-      if(!paused && !drag){
-        c.scrollLeft += SPEED;
-        var W = c.clientWidth;
-        if(W > 0 && c.scrollLeft >= W * n) c.scrollLeft = 0;
-        var idx = W > 0 ? Math.round(c.scrollLeft / W) % n : 0;
-        dots.forEach(function(d, j){ d.classList.toggle('on', j === idx); });
+      if(!paused&&!drag){
+        c.scrollLeft+=SPEED;
+        var W=c.clientWidth;
+        if(W>0&&c.scrollLeft>=W*n) c.scrollLeft=0;
+        var idx=W>0?Math.round(c.scrollLeft/W)%n:0;
+        dots.forEach(function(d,j){ d.classList.toggle('on',j===idx); });
       }
       requestAnimationFrame(tick);
     })();
@@ -1385,18 +1124,14 @@ function showSub(name){
 // ── 5. Scroll reveal ───────────────────────────────────────────────────────
 (function(){
   document.body.classList.add('js');
-  var els = document.querySelectorAll('.reveal');
-  var io  = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.07, rootMargin: '0px 0px -8% 0px' });
+  var els=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+  },{threshold:0.07,rootMargin:'0px 0px -8% 0px'});
   els.forEach(function(el){ io.observe(el); });
   setTimeout(function(){
-    els.forEach(function(el){
-      if(el.getBoundingClientRect().top < window.innerHeight * 1.3) el.classList.add('on');
-    });
-  }, 5000);
+    els.forEach(function(el){ if(el.getBoundingClientRect().top<window.innerHeight*1.3) el.classList.add('on'); });
+  },5000);
 })();
 </script>
 </body>
