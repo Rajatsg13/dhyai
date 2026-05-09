@@ -19,7 +19,7 @@
   --ink-2:  #0a0806;   /* deep black — hero, footer, video beds */
   --warm:   #221508;   /* dark amber — section accent gradient */
   --cream:  #EDE3CC;   /* warm off-white — primary text */
-  --ivory:  #f0e8d6;   /* brightest surface — pull quotes, highlights */
+  --ivory:  #f6efe2;   /* brightest surface — headings, hero, product names */
   --dim:    #9A9080;   /* muted warm grey — secondary text */
   --faint:  #6a5e52;   /* dark warm grey — tertiary text */
   --ochre:  #C4882A;   /* amber — kickers, accents, links */
@@ -128,7 +128,7 @@ body::before {
   transition: opacity .6s ease;
 }
 #nav.on { opacity: 1; pointer-events: auto; }
-.nav-brand img { height: 22px; display: block; cursor: pointer; }
+.nav-brand img { height: 28px; display: block; cursor: pointer; }
 .nav-links { display: flex; gap: 1.6rem; align-items: center; }
 .nav-links a,
 .nav-links button {
@@ -139,7 +139,7 @@ body::before {
 }
 .nav-links a:hover, .nav-links button:hover { color: var(--ochre); }
 @media (max-width: 480px) {
-  .nav-brand img { height: 18px; }
+  .nav-brand img { height: 22px; }
   .nav-links { gap: .9rem; }
   .nav-links a, .nav-links button { font-size: .5rem; letter-spacing: .18em; }
 }
@@ -180,13 +180,13 @@ body::before {
 
 /* ── Kickers ── */
 .kicker {
-  font-family: var(--sans); font-size: .56rem; font-weight: 300;
-  letter-spacing: .36em; text-transform: uppercase;
+  font-family: var(--sans); font-size: .78rem; font-weight: 300;
+  letter-spacing: .3em; text-transform: uppercase;
   color: var(--ochre); margin-bottom: .9rem;
 }
 .sp-kicker {
-  font-family: var(--sans); font-size: .54rem; font-weight: 300;
-  letter-spacing: .38em; text-transform: uppercase;
+  font-family: var(--sans); font-size: .75rem; font-weight: 300;
+  letter-spacing: .32em; text-transform: uppercase;
   color: var(--ochre); margin-bottom: .8rem;
 }
 
@@ -218,8 +218,8 @@ body::before {
   left: clamp(1.5rem, 6vw, 5rem);
   z-index: 4; max-width: 80%;
   font-family: var(--serif); font-weight: 300;
-  font-size: clamp(1.1rem, 2.4vw, 2rem);
-  line-height: 1.2; color: var(--cream);
+  font-size: clamp(1.3rem, 2.8vw, 2.2rem);
+  line-height: 1.2; color: var(--ivory);
   text-shadow: 0 2px 28px rgba(0,0,0,.8);
 }
 .play-btn {
@@ -258,7 +258,7 @@ body::before {
   display: flex; flex-direction: column; gap: 1.1rem;
   text-align: left;
 }
-.kt1 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.2rem, 2.2vw, 1.9rem); color: var(--cream); }
+.kt1 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.5rem, 2.8vw, 2.3rem); color: var(--ivory); }
 .kt2 { font-family: var(--serif); font-weight: 300; font-size: clamp(.9rem, 1.2vw, 1.08rem); color: var(--dim); }
 .kt3 { font-family: var(--sans); font-weight: 300; font-size: clamp(.78rem, .95vw, .92rem); color: var(--dim); }
 .kt4 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.05rem, 1.7vw, 1.55rem); font-style: italic; color: var(--cream); }
@@ -271,8 +271,8 @@ body::before {
 }
 .sec-head h2 {
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
-  line-height: .92; color: var(--cream);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: .92; color: var(--ivory);
 }
 .s {
   font-family: var(--serif); font-size: clamp(.9rem, 1.2vw, 1.1rem);
@@ -305,8 +305,8 @@ body::before {
 .metal .sec-head { margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem); }
 .metal h3 {
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(1.3rem, 2.2vw, 2rem);
-  line-height: 1; color: var(--cream); margin-top: .4rem;
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  line-height: 1; color: var(--ivory); margin-top: .4rem;
 }
 .metal-prod {
   max-width: 1400px;
@@ -375,7 +375,7 @@ body::before {
 .prod-name {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(1.2rem, 2vw, 1.85rem);
-  color: var(--cream); line-height: 1; margin-top: .3rem;
+  color: var(--ivory); line-height: 1; margin-top: .3rem;
 }
 .prod-specs {
   font-family: var(--sans); font-size: clamp(.7rem, .82vw, .82rem);
@@ -424,12 +424,12 @@ body::before {
 .sp-h1 {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(2.2rem, 4vw, 3.8rem);
-  line-height: .88; color: var(--cream);
+  line-height: .88; color: var(--ivory);
 }
 .sp-h2 {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(1.9rem, 3.5vw, 3.2rem);
-  line-height: .92; color: var(--cream);
+  line-height: .92; color: var(--ivory);
 }
 .sp-large {
   font-family: var(--serif); font-weight: 300;
@@ -504,7 +504,7 @@ body::before {
 .fo-name {
   font-family: var(--serif); font-weight: 300; font-style: italic;
   font-size: clamp(1.4rem, 2.2vw, 2.4rem);
-  line-height: .92; color: var(--cream); margin-top: .6rem; margin-bottom: .9rem;
+  line-height: .92; color: var(--ivory); margin-top: .6rem; margin-bottom: .9rem;
 }
 .fo-stanzas p {
   font-family: var(--serif-b); font-weight: 300;
@@ -1093,31 +1093,53 @@ function showSub(name){
   window.scrollTo(0,0); currentSub=name;
 }
 
-// ── 4. Carousels ───────────────────────────────────────────────────────────
+// ── 4. Carousels — interval-based slide advance ────────────────────────────
 (function(){
   document.querySelectorAll('.carousel').forEach(function(c){
     var slides=Array.from(c.querySelectorAll('.slide')),n=slides.length;
     if(n<=1) return;
+    // Clone for seamless loop
     slides.forEach(function(s){ c.appendChild(s.cloneNode(true)); });
     var prodEl=c.closest('.prod')||c.closest('.metal-prod');
     var dots=prodEl?Array.from(prodEl.querySelectorAll('.prod-dots .dot')):[];
-    var SPEED=0.38,paused=false,drag=false,dX,dL;
-    c.addEventListener('touchstart',function(){ paused=true; },{passive:true});
-    c.addEventListener('touchend',function(){ paused=false; },{passive:true});
-    c.addEventListener('touchcancel',function(){ paused=false; },{passive:true});
-    c.addEventListener('mousedown',function(e){ drag=true; paused=true; dX=e.pageX; dL=c.scrollLeft; c.classList.add('dragging'); });
-    window.addEventListener('mouseup',function(){ if(!drag) return; drag=false; paused=false; c.classList.remove('dragging'); });
-    window.addEventListener('mousemove',function(e){ if(!drag) return; e.preventDefault(); c.scrollLeft=dL-(e.pageX-dX); });
-    (function tick(){
-      if(!paused&&!drag){
-        c.scrollLeft+=SPEED;
-        var W=c.clientWidth;
-        if(W>0&&c.scrollLeft>=W*n) c.scrollLeft=0;
-        var idx=W>0?Math.round(c.scrollLeft/W)%n:0;
-        dots.forEach(function(d,j){ d.classList.toggle('on',j===idx); });
+    var cur=0,paused=false,drag=false,dX,dL;
+
+    function setDots(idx){ dots.forEach(function(d,j){ d.classList.toggle('on',j===idx); }); }
+
+    function advance(){
+      if(paused||drag) return;
+      var W=c.clientWidth; if(!W) return;
+      cur++;
+      c.scrollTo({left:cur*W,behavior:'smooth'});
+      setDots(cur%n);
+      // After smooth scroll, if we're on a clone, snap back silently
+      if(cur>=n){
+        setTimeout(function(){ c.scrollLeft=0; cur=0; setDots(0); },520);
       }
-      requestAnimationFrame(tick);
-    })();
+    }
+
+    setInterval(advance,3000);
+
+    // Touch — pause while swiping, then sync cur
+    c.addEventListener('touchstart',function(){ paused=true; },{passive:true});
+    c.addEventListener('touchend',function(){
+      paused=false;
+      var W=c.clientWidth;
+      if(W) cur=Math.round(c.scrollLeft/W)%n;
+      setDots(cur);
+    },{passive:true});
+    c.addEventListener('touchcancel',function(){ paused=false; },{passive:true});
+
+    // Mouse drag
+    c.addEventListener('mousedown',function(e){ drag=true; paused=true; dX=e.pageX; dL=c.scrollLeft; c.classList.add('dragging'); });
+    window.addEventListener('mouseup',function(){
+      if(!drag) return; drag=false; paused=false;
+      c.classList.remove('dragging');
+      var W=c.clientWidth;
+      if(W) cur=Math.round(c.scrollLeft/W)%n;
+      setDots(cur);
+    });
+    window.addEventListener('mousemove',function(e){ if(!drag) return; e.preventDefault(); c.scrollLeft=dL-(e.pageX-dX); });
   });
 })();
 
