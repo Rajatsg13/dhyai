@@ -6,30 +6,22 @@
 <meta name="description" content="Dhyai develops objects for long-term use. Block-printed textiles and hand-cast brass from Bengaluru, made to order.">
 <meta property="og:title" content="Dhyai">
 <meta property="og:description" content="Objects developed for use, handling, and retention.">
-<meta name="theme-color" content="#F0E6D0">
+<meta name="theme-color" content="#201610">
 <link rel="icon" href="assets/images/favicon.png">
 <title>Dhyai — Bengaluru</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Display:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant:ital,wght@0,300;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
-/* ── Palette: warm architectural ── */
+/* ── Palette: warm architectural dark ── */
 :root {
-  /* Dark — entry only */
-  --ink:       #1D1914;
-  --ink-2:     #0a0806;
-  --cream:     #EDE3CC;
-  --dim:       #9A9080;
-  --faint:     #6a5e52;
-
-  /* Warm world — all sections after entry */
-  --parchment: #F0E6D0;
-  --parchment-2:#E8DCC4;
-  --warm-text: #271B11;
-  --warm-dim:  #7A6858;
-  --warm-faint:#A09078;
-
-  --ochre:  #C4882A;
+  --ink:    #201610;   /* deep warm brown — body ground */
+  --ink-2:  #160E08;   /* darker warm — entry, hero beds */
+  --cream:  #EDE3CC;   /* warm off-white — primary text */
+  --ivory:  #f6efe2;   /* brightest — headings, product names */
+  --dim:    #9A9080;   /* muted warm grey — secondary text */
+  --faint:  #6a5e52;   /* dark warm grey — tertiary text */
+  --ochre:  #C4882A;   /* amber — kickers, accents */
   --serif:  'Cormorant Display', Georgia, serif;
   --serif-b:'Cormorant', Georgia, serif;
   --sans:   'Jost', sans-serif;
@@ -39,8 +31,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--parchment);
-  color: var(--warm-text);
+  background: var(--ink);
+  color: var(--cream);
   font-family: var(--sans);
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
@@ -125,18 +117,18 @@ body::before {
   z-index: 600;
   display: flex; justify-content: space-between; align-items: center;
   padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
-  background: linear-gradient(180deg, rgba(240,230,208,.96) 0%, rgba(240,230,208,.60) 65%, transparent 100%);
+  background: linear-gradient(180deg, rgba(22,14,8,.97) 0%, rgba(22,14,8,.55) 65%, transparent 100%);
   opacity: 0; pointer-events: none;
   transition: opacity .6s ease;
 }
 #nav.on { opacity: 1; pointer-events: auto; }
-.nav-brand img { height: 28px; display: block; cursor: pointer; filter: brightness(0); }
+.nav-brand img { height: 32px; display: block; cursor: pointer; }
 .nav-links { display: flex; gap: 1.6rem; align-items: center; }
 .nav-links a,
 .nav-links button {
   font-family: var(--sans); font-size: .6rem; font-weight: 300;
   letter-spacing: .28em; text-transform: uppercase;
-  color: var(--warm-dim); background: none; border: none;
+  color: var(--dim); background: none; border: none;
   cursor: pointer; transition: color .3s; text-decoration: none;
 }
 .nav-links a:hover, .nav-links button:hover { color: var(--ochre); }
@@ -150,17 +142,16 @@ body::before {
 .sub-nav {
   position: fixed; top: 3.6rem; left: 0; right: 0;
   z-index: 400;
-  background: rgba(240,230,208,.97);
-  backdrop-filter: blur(8px);
+  background: rgba(22,14,8,.98);
   justify-content: center; gap: 2.4rem;
   padding: .65rem 0;
-  border-bottom: 1px solid rgba(39,27,17,.08);
+  border-bottom: 1px solid rgba(237,227,204,.05);
 }
 .sub-nav button {
   position: relative;
   font-family: var(--sans); font-size: .58rem; font-weight: 300;
   letter-spacing: .28em; text-transform: uppercase;
-  color: var(--warm-dim); background: none; border: none;
+  color: var(--dim); background: none; border: none;
   cursor: pointer; padding: .4rem 1.6rem; transition: color .3s;
 }
 .sub-nav button.on { color: var(--ochre); }
@@ -219,7 +210,7 @@ body::before {
 .sec-head h2 {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  line-height: .94; color: var(--warm-text);
+  line-height: .94; color: var(--ivory);
 }
 .s {
   font-family: var(--serif); font-size: clamp(.85rem, 1.1vw, 1rem);
@@ -228,25 +219,29 @@ body::before {
 .sec-desc {
   font-family: var(--serif); font-weight: 300;
   font-size: clamp(.88rem, 1.1vw, 1.05rem);
-  line-height: 1.72; color: var(--warm-dim);
+  line-height: 1.72; color: var(--dim);
   max-width: 58ch; margin-top: .8rem;
 }
 
 /* ── Textile sections ── */
 .textile {
-  border-top: 1px solid rgba(39,27,17,.08);
+  border-top: 1px solid rgba(237,227,204,.06);
 }
 
 /* ── Metal section ── */
 .metal {
-  background: var(--parchment-2);
-  border-top: 1px solid rgba(39,27,17,.08);
+  background: linear-gradient(180deg,
+    var(--ink) 0%, #120C06 20%,
+    #100A05 50%, #100A05 80%,
+    var(--ink) 100%
+  );
+  border-top: 1px solid rgba(237,227,204,.06);
 }
 .metal .sec-head { margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem); }
 .metal h3 {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(1.4rem, 2.4vw, 2.2rem);
-  line-height: 1; color: var(--warm-text); margin-top: .4rem;
+  line-height: 1; color: var(--ivory); margin-top: .4rem;
 }
 .metal-prod {
   max-width: 1400px;
@@ -299,7 +294,7 @@ body::before {
 }
 .dot {
   width: 4px; height: 4px; border-radius: 50%;
-  background: var(--warm-faint); transition: background .3s; flex-shrink: 0;
+  background: var(--faint); transition: background .3s; flex-shrink: 0;
 }
 .dot.on { background: var(--ochre); }
 
@@ -315,16 +310,16 @@ body::before {
 .prod-name {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(1.1rem, 1.8vw, 1.6rem);
-  color: var(--warm-text); line-height: 1; margin-top: .3rem;
+  color: var(--ivory); line-height: 1; margin-top: .3rem;
 }
 .prod-specs {
   font-family: var(--sans); font-size: clamp(.7rem, .82vw, .82rem);
-  font-weight: 300; color: var(--warm-dim);
+  font-weight: 300; color: var(--dim);
   letter-spacing: .025em; margin-top: .35rem;
 }
 .prod-mto {
   font-family: var(--serif-b); font-size: clamp(.68rem, .8vw, .8rem);
-  font-style: italic; color: var(--warm-faint); margin-top: .22rem;
+  font-style: italic; color: var(--faint); margin-top: .22rem;
 }
 .enq {
   font-family: var(--sans); font-size: .58rem; font-weight: 300;
@@ -339,8 +334,8 @@ body::before {
 
 /* ── Main footer ── */
 .main-footer {
-  background: var(--parchment-2);
-  border-top: 1px solid rgba(39,27,17,.1);
+  background: var(--ink-2);
+  border-top: 1px solid rgba(237,227,204,.05);
   padding: clamp(3rem, 5.5vw, 4.5rem) clamp(1.5rem, 4vw, 4rem) 2.5rem;
   text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 1.6rem;
@@ -349,14 +344,14 @@ body::before {
 .ft-links a, .ft-links button {
   font-family: var(--sans); font-size: .6rem; font-weight: 300;
   letter-spacing: .28em; text-transform: uppercase;
-  color: var(--warm-dim); background: none; border: none;
+  color: var(--dim); background: none; border: none;
   cursor: pointer; text-decoration: none; transition: color .3s;
 }
 .ft-links a:hover, .ft-links button:hover { color: var(--ochre); }
-.ft-copy { font-family: var(--sans); font-size: .64rem; letter-spacing: .06em; color: var(--warm-faint); }
+.ft-copy { font-family: var(--sans); font-size: .64rem; letter-spacing: .06em; color: var(--faint); }
 
 /* ── Sub-pages ── */
-.sp { display: none; min-height: 100svh; background: var(--parchment); }
+.sp { display: none; min-height: 100svh; background: var(--ink); }
 .sp-inner {
   max-width: 780px; margin: 0 auto;
   padding: clamp(7rem, 11vw, 9.5rem) clamp(1.5rem, 4vw, 4rem) clamp(3.5rem, 7vw, 5.5rem);
@@ -364,43 +359,43 @@ body::before {
 .sp-h1 {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(2rem, 3.5vw, 3.2rem);
-  line-height: .9; color: var(--warm-text);
+  line-height: .9; color: var(--ivory);
 }
 .sp-h2 {
   font-family: var(--serif); font-weight: 400;
   font-size: clamp(1.7rem, 3vw, 2.8rem);
-  line-height: .92; color: var(--warm-text);
+  line-height: .92; color: var(--ivory);
 }
 .sp-large {
   font-family: var(--serif); font-weight: 300;
   font-size: clamp(1rem, 1.5vw, 1.3rem);
-  color: var(--warm-text); margin-top: 1.4rem;
+  color: var(--ivory); margin-top: 1.4rem;
 }
 .sp-body p {
   font-family: var(--serif-b); font-weight: 300;
   font-size: clamp(.95rem, 1.2vw, 1.1rem);
-  line-height: 1.82; color: var(--warm-dim); margin-top: 1.2rem;
+  line-height: 1.82; color: var(--dim); margin-top: 1.2rem;
 }
 .sp-pull {
-  border-left: 1px solid rgba(196,136,42,.4);
+  border-left: 1px solid rgba(196,136,42,.35);
   padding-left: 1.4rem; margin-top: 2.4rem;
   font-family: var(--serif); font-style: italic; font-weight: 300;
   font-size: clamp(.92rem, 1.2vw, 1.08rem);
-  line-height: 1.6; color: var(--warm-text);
+  line-height: 1.6; color: var(--ivory);
 }
 
 /* Contact */
 .sp-note {
   font-family: var(--serif-b); font-style: italic; font-weight: 300;
   font-size: clamp(.92rem, 1.2vw, 1.08rem);
-  line-height: 1.72; color: var(--warm-dim);
+  line-height: 1.72; color: var(--dim);
   margin: 1.1rem 0 2.2rem; max-width: 50ch;
 }
-.ci-list { list-style: none; border-top: 1px solid rgba(39,27,17,.1); }
+.ci-list { list-style: none; border-top: 1px solid rgba(237,227,204,.06); }
 .ci {
   display: grid; grid-template-columns: 7rem 1fr;
   gap: 1.2rem; padding: 1.3rem 0;
-  border-bottom: 1px solid rgba(39,27,17,.1); align-items: start;
+  border-bottom: 1px solid rgba(237,227,204,.06); align-items: start;
 }
 @media (max-width: 500px) { .ci { grid-template-columns: 1fr; gap: .35rem; } }
 .ci-label {
@@ -410,13 +405,13 @@ body::before {
 }
 .ci-val a {
   font-family: var(--serif); font-size: clamp(.95rem, 1.3vw, 1.12rem);
-  color: var(--warm-text); text-decoration: none; display: block;
+  color: var(--cream); text-decoration: none; display: block;
 }
 .ci-val a:hover { color: var(--ochre); }
 .ci-val p {
   font-family: var(--serif-b); font-style: italic;
   font-size: clamp(.78rem, .95vw, .92rem);
-  color: var(--warm-dim); margin-top: .3rem;
+  color: var(--dim); margin-top: .3rem;
 }
 
 /* ── Founder — photo with left overlay ── */
@@ -478,8 +473,8 @@ body::before {
 
 /* Sub-page footer */
 .sp-footer {
-  background: var(--parchment-2);
-  border-top: 1px solid rgba(39,27,17,.08);
+  background: var(--ink-2);
+  border-top: 1px solid rgba(237,227,204,.05);
   padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 4rem);
   display: flex; flex-direction: column; align-items: center; gap: 1.3rem;
   text-align: center;
@@ -487,16 +482,13 @@ body::before {
 .sp-back {
   font-family: var(--sans); font-size: .58rem;
   letter-spacing: .24em; text-transform: uppercase;
-  color: var(--warm-dim); background: none; border: none;
+  color: var(--dim); background: none; border: none;
   cursor: pointer; transition: color .3s;
 }
 .sp-back:hover { color: var(--ochre); }
 
 /* ── ध्यै inline highlight ── */
 .dv { color: var(--ochre); }
-
-/* Wordmark on warm backgrounds */
-.main-footer img, .sp-footer img { filter: brightness(0); opacity: .75; }
 
 /* ── Scroll reveal ── */
 .js .reveal {
