@@ -4,7 +4,7 @@
 */
 
 :root {
-  --ink:   #1D1914;
+  --ink:   #211d1a;
   --cream: #EDE3CC;
   --dim:   #9A9080;
   --faint: #524840;
@@ -32,7 +32,7 @@ body {
   font-family: var(--sans);
   font-weight: 300;
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.78;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -118,7 +118,7 @@ body::before {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
-  background: rgba(29, 25, 20, 0.82);
+  background: rgba(33, 29, 26, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(237, 227, 204, 0.08);
@@ -198,7 +198,7 @@ body::before {
     position: absolute;
     top: var(--header-h);
     left: 0; right: 0;
-    background: rgba(24, 20, 16, 0.98);
+    background: rgba(33, 29, 26, 0.98);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(237, 227, 204, 0.08);
@@ -227,7 +227,7 @@ body::before {
 
 /* ── Sections ── */
 .section {
-  padding: clamp(60px, 8vw, 120px) 0;
+  padding: clamp(80px, 9vw, 150px) 0;
 }
 .section + .section {
   border-top: 1px solid rgba(237, 227, 204, .07);
@@ -270,7 +270,7 @@ h3 {
   line-height: 1.2;
 }
 p {
-  margin: 0 0 8px;
+  margin: 0 0 14px;
   color: var(--dim);
 }
 p:last-child { margin-bottom: 0; }
@@ -403,7 +403,7 @@ p:last-child { margin-bottom: 0; }
 
 /* ── Subnav ── */
 .subnav {
-  background: rgba(25, 21, 17, 0.96);
+  background: rgba(33, 29, 26, 0.96);
   border-bottom: 1px solid rgba(237, 227, 204, .07);
   position: sticky;
   top: var(--header-h);
@@ -577,7 +577,7 @@ small { font-size: 12px; color: var(--dim); }
   position: fixed;
   bottom: 0; left: 0; right: 0;
   z-index: 1500;
-  background: rgba(20, 17, 13, 0.98);
+  background: rgba(33, 29, 26, 0.98);
   border-top: 1px solid rgba(237, 227, 204, .1);
   padding: 20px var(--pad-x);
   display: flex;

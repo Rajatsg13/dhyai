@@ -6,7 +6,7 @@
 <meta name="description" content="Dhyai develops objects for long-term use. Block-printed textiles and hand-cast brass from Bengaluru, made to order.">
 <meta property="og:title" content="Dhyai">
 <meta property="og:description" content="Objects developed for use, handling, and retention.">
-<meta name="theme-color" content="#201610">
+<meta name="theme-color" content="#211d1a">
 <link rel="icon" href="assets/images/favicon.png">
 <title>Dhyai — Bengaluru</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +15,8 @@
 <style>
 /* ── Palette: warm architectural dark ── */
 :root {
-  --ink:    #201610;   /* deep warm brown — body ground */
-  --ink-2:  #160E08;   /* darker warm — entry, hero beds */
+  --ink:    #211d1a;   /* warm mineral dark — body ground */
+  --ink-2:  #2d2824;   /* warm mid-dark — footers, hero beds */
   --cream:  #EDE3CC;   /* warm off-white — primary text */
   --ivory:  #f6efe2;   /* brightest — headings, product names */
   --dim:    #9A9080;   /* muted warm grey — secondary text */
@@ -64,24 +64,23 @@ body::before {
   position: absolute; inset: 0;
   background: url('assets/images/jaali.webp') center / cover no-repeat;
   opacity: 0;
-  transform: scale(1.04);
-  transition: opacity 1.4s ease, transform 1.6s ease;
-  will-change: transform;
+  transition: opacity 1.4s ease;
+  will-change: opacity;
 }
-#entry[data-s="0"] .bg-jaali { opacity: .25; transform: scale(1.03); }
-#entry[data-s="1"] .bg-jaali { opacity: .44; transform: scale(1.01); }
-#entry[data-s="2"] .bg-jaali { opacity: .62; transform: scale(1.00); }
-#entry[data-s="3"] .bg-jaali { opacity: .12; transform: scale(1.05); }
+#entry[data-s="0"] .bg-jaali { opacity: .28; }
+#entry[data-s="1"] .bg-jaali { opacity: .46; }
+#entry[data-s="2"] .bg-jaali { opacity: .60; }
+#entry[data-s="3"] .bg-jaali { opacity: .10; }
 
 .bg-veil {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, rgba(10,8,6,.28) 0%, rgba(10,8,6,.94) 100%);
+  background: radial-gradient(ellipse at center, rgba(33,29,26,.12) 0%, rgba(33,29,26,.80) 100%);
   transition: opacity 1.4s ease;
 }
-#entry[data-s="0"] .bg-veil { opacity: .94; }
-#entry[data-s="1"] .bg-veil { opacity: .82; }
-#entry[data-s="2"] .bg-veil { opacity: .70; }
-#entry[data-s="3"] .bg-veil { opacity: .96; }
+#entry[data-s="0"] .bg-veil { opacity: .74; }
+#entry[data-s="1"] .bg-veil { opacity: .62; }
+#entry[data-s="2"] .bg-veil { opacity: .54; }
+#entry[data-s="3"] .bg-veil { opacity: .75; }
 
 .es {
   position: absolute; inset: 0;
@@ -94,15 +93,15 @@ body::before {
 .es.on { opacity: 1; }
 .e-text {
   font-family: var(--serif); font-weight: 300;
-  font-size: clamp(.82rem, 1.4vw, 1.1rem);
-  line-height: 1.75; color: var(--cream);
+  font-size: clamp(.88rem, 1.5vw, 1.15rem);
+  line-height: 1.80; color: var(--ivory);
   text-align: center;
   padding: 0 clamp(1.5rem, 6vw, 4rem);
   max-width: 38ch;
   letter-spacing: .01em;
 }
 .e-wm {
-  height: clamp(40px, 8vw, 60px); display: block;
+  height: clamp(50px, 10vw, 74px); display: block;
   opacity: 0;
   transition: opacity 0.8s ease 0.2s;
 }
@@ -117,7 +116,7 @@ body::before {
   z-index: 600;
   display: flex; justify-content: space-between; align-items: center;
   padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
-  background: linear-gradient(180deg, rgba(22,14,8,.97) 0%, rgba(22,14,8,.55) 65%, transparent 100%);
+  background: linear-gradient(180deg, rgba(33,29,26,.97) 0%, rgba(33,29,26,.55) 65%, transparent 100%);
   opacity: 0; pointer-events: none;
   transition: opacity .6s ease;
 }
@@ -142,7 +141,7 @@ body::before {
 .sub-nav {
   position: fixed; top: 3.6rem; left: 0; right: 0;
   z-index: 400;
-  background: rgba(22,14,8,.98);
+  background: rgba(33,29,26,.98);
   justify-content: center; gap: 2.4rem;
   padding: .65rem 0;
   border-bottom: 1px solid rgba(237,227,204,.05);
@@ -186,13 +185,16 @@ body::before {
 
 /* ── Hero frame — contained, architectural ── */
 .hero-frame {
-  margin: clamp(5rem, 9vw, 7rem) auto clamp(1rem, 2vw, 1.5rem);
+  margin: clamp(5rem, 9vw, 7.5rem) auto clamp(3rem, 5vw, 5rem);
   width: calc(100% - 2 * clamp(1.5rem, 4vw, 4rem));
-  max-width: 1200px;
+  max-width: 900px;
   aspect-ratio: 16/9;
   overflow: hidden;
   background: var(--ink-2);
   display: block;
+}
+@media (min-width: 860px) {
+  .hero-frame { max-width: min(70vw, 950px); }
 }
 .hero-frame img,
 .hero-frame video {
@@ -202,10 +204,10 @@ body::before {
 
 
 /* ── Sections ── */
-.section { padding: clamp(4.5rem, 9vw, 7rem) clamp(1.5rem, 4vw, 4rem); }
+.section { padding: clamp(6rem, 10vw, 9rem) clamp(1.5rem, 4vw, 4rem); }
 .sec-head {
   max-width: 1400px;
-  margin: 0 auto clamp(2.5rem, 4.5vw, 4.5rem);
+  margin: 0 auto clamp(3rem, 5vw, 5rem);
 }
 .sec-head h2 {
   font-family: var(--serif); font-weight: 400;
@@ -219,8 +221,8 @@ body::before {
 .sec-desc {
   font-family: var(--serif); font-weight: 300;
   font-size: clamp(.88rem, 1.1vw, 1.05rem);
-  line-height: 1.72; color: var(--dim);
-  max-width: 58ch; margin-top: .8rem;
+  line-height: 1.80; color: var(--dim);
+  max-width: 52ch; margin-top: 1rem;
 }
 
 /* ── Textile sections ── */
@@ -231,8 +233,8 @@ body::before {
 /* ── Metal section ── */
 .metal {
   background: linear-gradient(180deg,
-    var(--ink) 0%, #120C06 20%,
-    #100A05 50%, #100A05 80%,
+    var(--ink) 0%, #252120 20%,
+    #1e1b18 50%, #1e1b18 80%,
     var(--ink) 100%
   );
   border-top: 1px solid rgba(237,227,204,.06);
@@ -245,7 +247,7 @@ body::before {
 }
 .metal-prod {
   max-width: 1400px;
-  margin: 0 auto clamp(3.5rem, 7vw, 6rem);
+  margin: 0 auto clamp(4.5rem, 8vw, 7rem);
 }
 .metal-prod:last-child { margin-bottom: 0; }
 .metal-prod .prod { max-width: 520px; }
@@ -255,7 +257,7 @@ body::before {
   max-width: 1400px; margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: clamp(2rem, 3.5vw, 2.8rem);
+  gap: clamp(2rem, 4vw, 3.5rem);
 }
 
 /* ── Carousel ── */
@@ -374,7 +376,7 @@ body::before {
 .sp-body p {
   font-family: var(--serif-b); font-weight: 300;
   font-size: clamp(.95rem, 1.2vw, 1.1rem);
-  line-height: 1.82; color: var(--dim); margin-top: 1.2rem;
+  line-height: 1.88; color: var(--dim); margin-top: 1.6rem;
 }
 .sp-pull {
   border-left: 1px solid rgba(196,136,42,.35);
@@ -443,10 +445,12 @@ body::before {
 }
 .fo-stanzas p {
   font-family: var(--serif-b); font-weight: 300;
-  font-size: clamp(.76rem, .95vw, .94rem);
-  line-height: 1.88; color: var(--cream); margin-top: .9rem;
+  font-size: clamp(.78rem, 1vw, .96rem);
+  line-height: 1.92; color: var(--cream); margin-top: 1.4rem;
 }
 .fo-em { font-style: italic; }
+.fo-stanzas p.fo-em,
+.fo-mobile p.fo-em { margin-top: 2rem; }
 .fo-sep { letter-spacing: .1em; margin-top: 1.4rem !important; }
 .fo-closing { font-style: italic; color: var(--dim) !important; }
 
@@ -457,8 +461,8 @@ body::before {
 }
 .fo-mobile p {
   font-family: var(--serif-b); font-weight: 300;
-  font-size: clamp(.82rem, 1.05vw, .98rem);
-  line-height: 1.88; color: var(--cream); margin-top: .9rem;
+  font-size: clamp(.84rem, 1.05vw, .98rem);
+  line-height: 1.92; color: var(--cream); margin-top: 1.4rem;
 }
 .fo-mobile .fo-em { font-style: italic; }
 .fo-mobile .fo-sep { letter-spacing: .1em; margin-top: 1.4rem !important; color: var(--dim); }
@@ -504,10 +508,10 @@ body::before {
 <div id="entry">
   <div class="bg-jaali"></div>
   <div class="bg-veil"></div>
-  <div class="es" data-hold="1500">
+  <div class="es" data-hold="4000">
     <p class="e-text">a stone from a riverbed sits on the shelf for years.<br>it is time embodied in material.<br>it is built to stay.</p>
   </div>
-  <div class="es" data-hold="900">
+  <div class="es" data-hold="2000">
     <img class="e-wm" src="assets/images/wordmark.png" alt="Dhyai">
   </div>
 </div>
