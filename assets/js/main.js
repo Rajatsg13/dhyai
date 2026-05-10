@@ -1,89 +1,77 @@
-/* DHYAI — Iteration 2 (Placeholder Build)
-   - Mobile nav toggle
-   - Subtle fade-in via IntersectionObserver (opacity only)
-   - Active nav highlighting
-*/
-
+/* DHYAI V3 — main.js */
 (function(){
-  // Apply saved colour theme before anything renders
-  var savedTheme = localStorage.getItem('dhyai_theme') || '';
-  document.documentElement.setAttribute('data-theme', savedTheme);
 
-  // Inject theme toggle swatches into header
-  var themeToggle = document.createElement('div');
-  themeToggle.className = 'theme-toggle';
-  themeToggle.setAttribute('aria-label', 'Switch colour theme');
-  [
-    ['',       '#e2dccf', 'Warm'],
-    ['white',  '#ffffff', 'White'],
-    ['ivory',  '#f5f0e8', 'Ivory'],
-    ['stone',  '#d2cec8', 'Stone'],
-    ['blush',  '#ece0db', 'Blush'],
-    ['sage',   '#d6dcd3', 'Sage'],
-    ['slate',  '#d4d8dc', 'Slate'],
-  ].forEach(function(opt) {
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'theme-swatch' + (savedTheme === opt[0] ? ' is-active' : '');
-    btn.style.background = opt[1];
-    btn.setAttribute('aria-label', opt[2] + ' theme');
-    btn.title = opt[2];
-    btn.addEventListener('click', function() {
-      savedTheme = opt[0];
-      document.documentElement.setAttribute('data-theme', opt[0]);
-      localStorage.setItem('dhyai_theme', opt[0]);
-      themeToggle.querySelectorAll('.theme-swatch').forEach(function(s) { s.classList.remove('is-active'); });
-      btn.classList.add('is-active');
-    });
-    themeToggle.appendChild(btn);
-  });
-  const navToggle = document.querySelector('[data-nav-toggle]');
-  const nav = document.querySelector('[data-nav]');
-  if (nav) nav.appendChild(themeToggle);
-  else {
-    var headerInner = document.querySelector('.header-inner');
-    if (headerInner) headerInner.appendChild(themeToggle);
+  // ── Entry animation (index.html only) ──────────────────────────────────────
+  var entryEl = document.getElementById('entry');
+  if(entryEl){
+    document.body.style.overflow = 'hidden';
+    var slides = entryEl.querySelectorAll('.es'),
+        cur    = 0,
+        FADE   = 900,
+        done   = false;
+
+    function finish(){
+      if(done) return;
+      done = true;
+      document.body.style.overflow = '';
+      entryEl.classList.add('done');
+      setTimeout(function(){ entryEl.style.display = 'none'; }, 1200);
+    }
+
+    function nextSlide(){
+      if(cur >= slides.length){ finish(); return; }
+      slides[cur].classList.add('active');
+      var hold = parseInt(slides[cur].getAttribute('data-hold'), 10);
+      setTimeout(function(){
+        slides[cur].classList.remove('active');
+        cur++;
+        setTimeout(nextSlide, FADE);
+      }, hold);
+    }
+    setTimeout(nextSlide, 400);
+
+    // Skip on click or tap
+    entryEl.addEventListener('click', finish);
+    var skipBtn = entryEl.querySelector('.entry-skip');
+    if(skipBtn) skipBtn.addEventListener('click', function(e){ e.stopPropagation(); finish(); });
   }
 
+  // ── Mobile nav toggle ──────────────────────────────────────────────────────
+  var navToggle = document.querySelector('[data-nav-toggle]');
+  var nav       = document.querySelector('[data-nav]');
   if(navToggle && nav){
-    navToggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
+    navToggle.addEventListener('click', function(){
+      var open = nav.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-
-    document.addEventListener('click', (e) => {
-      if (nav.classList.contains('is-open') && !e.target.closest('.site-header')) {
+    document.addEventListener('click', function(e){
+      if(nav.classList.contains('is-open') && !e.target.closest('.site-header')){
         nav.classList.remove('is-open');
         navToggle.setAttribute('aria-expanded', 'false');
       }
     });
-
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
+    nav.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
         nav.classList.remove('is-open');
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
-  // Active nav link based on current pathname
-  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  document.querySelectorAll('a[data-nav-link]').forEach(a => {
-    const href = (a.getAttribute('href') || '').toLowerCase();
-    if(href === path){
+  // ── Active nav highlighting ────────────────────────────────────────────────
+  var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('a[data-nav-link]').forEach(function(a){
+    if((a.getAttribute('href') || '').toLowerCase() === path)
       a.setAttribute('aria-current', 'page');
-    }
   });
-  document.querySelectorAll('a[data-subnav-link]').forEach(a => {
-    const href = (a.getAttribute('href') || '').toLowerCase();
-    if(href === path){
+  document.querySelectorAll('a[data-subnav-link]').forEach(function(a){
+    if((a.getAttribute('href') || '').toLowerCase() === path)
       a.setAttribute('aria-current', 'page');
-    }
   });
 
-  // Cookie consent banner
-  if (!localStorage.getItem('dhyai_cookie_consent')) {
-    const banner = document.createElement('div');
+  // ── Cookie consent banner ──────────────────────────────────────────────────
+  if(!localStorage.getItem('dhyai_cookie_consent')){
+    var banner = document.createElement('div');
     banner.className = 'cookie-banner';
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', 'Cookie consent');
@@ -94,31 +82,31 @@
         '<button class="btn-essential" type="button">Essential only</button>' +
       '</div>';
     document.body.appendChild(banner);
-    requestAnimationFrame(() => banner.classList.add('is-visible'));
+    requestAnimationFrame(function(){ banner.classList.add('is-visible'); });
 
-    function dismissBanner(value) {
-      localStorage.setItem('dhyai_cookie_consent', value);
+    function dismiss(val){
+      localStorage.setItem('dhyai_cookie_consent', val);
       banner.classList.remove('is-visible');
-      banner.addEventListener('transitionend', () => banner.remove(), { once: true });
+      banner.addEventListener('transitionend', function(){ banner.remove(); }, {once: true});
     }
-
-    banner.querySelector('.btn-accept').addEventListener('click', () => dismissBanner('all'));
-    banner.querySelector('.btn-essential').addEventListener('click', () => dismissBanner('essential'));
+    banner.querySelector('.btn-accept').addEventListener('click', function(){ dismiss('all'); });
+    banner.querySelector('.btn-essential').addEventListener('click', function(){ dismiss('essential'); });
   }
 
-  // Reveal on scroll (opacity only)
-  const els = document.querySelectorAll('.reveal');
+  // ── Scroll reveal ──────────────────────────────────────────────────────────
+  var revEls = document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
         if(entry.isIntersecting){
           entry.target.classList.add('is-visible');
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
+    }, {threshold: 0.12});
+    revEls.forEach(function(el){ io.observe(el); });
   } else {
-    els.forEach(el => el.classList.add('is-visible'));
+    revEls.forEach(function(el){ el.classList.add('is-visible'); });
   }
+
 })();
