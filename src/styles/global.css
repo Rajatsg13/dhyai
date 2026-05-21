@@ -132,7 +132,8 @@ p {
 body.nav-open { overflow: hidden; }
 
 .nav-logo img {
-  height: 28px;
+  height: 48px;
+  width: auto;
   display: block;
   transition: opacity .3s;
 }
@@ -626,7 +627,7 @@ body.nav-open { overflow: hidden; }
 }
 @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 3rem; } }
 
-.footer-brand img { height: 26px; margin-bottom: 1.2rem; }
+.footer-brand img { height: 44px; width: auto; margin-bottom: 1.2rem; }
 .footer-brand p {
   font-family: var(--sans); font-size: 9px; font-weight: 300;
   letter-spacing: .3em; text-transform: uppercase;
