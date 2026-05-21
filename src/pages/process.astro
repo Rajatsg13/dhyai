@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Process — Dhyai"
+  description="From drawing to block carving to hand printing — the Dhyai process prioritises structure and surface clarity at every step."
+  ogImage="/assets/images/process_block_print.jpg"
+  ogUrl="/process.html"
+  currentPage="process"
+>
+
+  <!-- ══ Hero ══ -->
+  <div class="page-hero">
+    <img
+      src="/assets/images/process_block_print.jpg"
+      alt="Block printing at the Dhyai studio"
+      loading="eager"
+      fetchpriority="high"
+    >
+    <div class="page-hero-overlay"></div>
+  </div>
+
+  <!-- ══ Intro ══ -->
+  <section class="section reveal">
+    <span class="kicker" style="margin-bottom:1.2rem">The Process</span>
+    <div class="rule-h"></div>
+    <h1 style="font-size:clamp(2.5rem,6vw,5rem); letter-spacing:.2em; margin-bottom:2rem">Process</h1>
+    <p style="max-width:560px; margin-bottom:1.2rem">
+      Material selection is directed by structure and surface clarity.
+      Drawing establishes scale. Blocks are carved to preserve alignment.
+      Printing is executed by hand. Each study is reviewed in light before release.
+    </p>
+    <p style="max-width:560px">
+      Engraving follows defined measurement. Surface application is controlled and restrained.
+      Nothing is released until the surface holds.
+    </p>
+  </section>
+
+  <!-- ══ Process steps ══ -->
+  <section class="section" style="padding-top:0">
+    <div class="process-grid reveal">
+      <div class="process-step">
+        <img src="/assets/images/process_drawing.jpg" alt="Drawing — establishing scale and proportion" loading="lazy">
+        <p class="process-step-num">01 · Drawing</p>
+        <p>Scale and rhythm are resolved on paper first. The composition must hold before the block is made.</p>
+      </div>
+      <div class="process-step d1">
+        <img src="/assets/images/process_block_detail.jpg" alt="Block carving — precision alignment" loading="lazy">
+        <p class="process-step-num">02 · Block carving</p>
+        <p>Blocks are carved by hand to preserve alignment. Tolerance is measured, not estimated.</p>
+      </div>
+      <div class="process-step d2">
+        <img src="/assets/images/process_printing_hand.jpg" alt="Hand printing — measured application" loading="lazy">
+        <p class="process-step-num">03 · Printing</p>
+        <p>Each impression is placed by hand. Pressure and pace are consistent across the surface.</p>
+      </div>
+      <div class="process-step d3">
+        <img src="/assets/images/material_surface_close.jpg" alt="Surface review — assessed in light" loading="lazy">
+        <p class="process-step-num">04 · Review</p>
+        <p>Finished surfaces are assessed in natural light. Only pieces that hold their structure are released.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Material section ══ -->
+  <section class="section" style="border-top:1px solid rgba(237,227,204,.05)">
+    <div class="two-col reveal">
+      <div class="two-col-img">
+        <img
+          src="/assets/images/material_surface_close.jpg"
+          alt="Cotton surface — selected for printing response"
+          loading="lazy"
+        >
+      </div>
+      <div class="two-col-text">
+        <span class="kicker">Material</span>
+        <div class="rule-h"></div>
+        <h2>Cotton selected for surface clarity</h2>
+        <p>
+          Weight and weave are matched to each study before production begins.
+          The cloth must receive the block cleanly — no bleed, no slip.
+        </p>
+        <p>
+          Mulmul for dohars. Slub cotton for bedcovers.
+          Each format uses the material best suited to how it will be used.
+        </p>
+        <p>
+          The surface improves with washing. Softening, not wearing.
+        </p>
+        <a href="/contact.html" class="btn-enquire">Enquire about a piece</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Process brief ══ -->
+  <section class="section" style="border-top:1px solid rgba(237,227,204,.05); text-align:center">
+    <div class="statement reveal">
+      <span class="kicker" style="margin-bottom:2rem">In summary</span>
+      <div class="rule" style="margin-bottom:3rem"></div>
+      <p style="max-width:560px; margin:0 auto 1rem">Material selection is directed by structure and surface clarity.</p>
+      <p style="max-width:560px; margin:0 auto 1rem">Drawing establishes scale. Blocks are carved to preserve alignment.</p>
+      <p style="max-width:560px; margin:0 auto 1rem">Printing is executed by hand. Engraving follows defined measurement.</p>
+      <p style="max-width:560px; margin:0 auto">Surface application is controlled and restrained. Each study is reviewed in light before release.</p>
+    </div>
+  </section>
+
+</Base>

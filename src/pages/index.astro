@@ -1,0 +1,177 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Dhyai — Bengaluru"
+  description="Dhyai develops objects for long-term use. Block-printed textiles and hand-cast brass from Bengaluru, made to order."
+  ogUrl="/index.html"
+  currentPage="home"
+>
+
+  <!-- ══ Hero ══ -->
+  <section class="hero">
+    <div class="hero-media">
+      <img
+        src="/assets/images/hero_jali_shadow.jpg"
+        alt="Dhyai — block-printed jaali pattern"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Dhyai</h1>
+      <p class="hero-tagline">Objects developed for use, handling, and retention</p>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">Scroll</div>
+  </section>
+
+  <!-- ══ Collections ══ -->
+  <div class="cols-grid">
+    <a class="col-card reveal" href="/sthiti.html">
+      <img src="/assets/images/sthiti_cover.jpg" alt="Sthiti — Collection I" loading="lazy">
+      <div class="col-card-layer">
+        <span class="kicker">Collection · I</span>
+        <h3>Sthiti</h3>
+        <span class="dev">स्थिति</span>
+        <span class="col-arrow">View collection →</span>
+      </div>
+    </a>
+    <a class="col-card reveal d1" href="/sthna.html">
+      <img src="/assets/images/sthna_cover.jpg" alt="Sthana — Collection II" loading="lazy">
+      <div class="col-card-layer">
+        <span class="kicker">Collection · II</span>
+        <h3>Sthana</h3>
+        <span class="dev">स्थान</span>
+        <span class="col-arrow">View collection →</span>
+      </div>
+    </a>
+    <a class="col-card reveal d2" href="/punar.html">
+      <img src="/assets/images/punar_cover.jpg" alt="Punar — Collection III" loading="lazy">
+      <div class="col-card-layer">
+        <span class="kicker">Collection · III</span>
+        <h3>Punar</h3>
+        <span class="dev">पुनर्</span>
+        <span class="col-arrow">View collection →</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══ Brand statement ══ -->
+  <section class="section" style="text-align:center; padding-block: var(--section-y);">
+    <div class="statement reveal">
+      <span class="kicker" style="margin-bottom:2rem">The Studio</span>
+      <div class="rule" style="margin-bottom:3rem"></div>
+      <h2>Surfaces that settle into their surroundings</h2>
+      <div class="rule" style="margin:2.5rem auto"></div>
+      <p>
+        DHYAI develops composed surfaces shaped by proportion and measured repetition.
+        Each study progresses through drawing and material testing until the structure settles.
+      </p>
+      <p style="margin-top:1rem">
+        Time is considered within the composition — influencing spacing, density, and rhythm.
+        Objects are released as complete studies, available in defined formats.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ Process teaser ══ -->
+  <section class="section" style="padding-block:var(--section-y)">
+    <div class="two-col reveal">
+      <div class="two-col-img">
+        <img
+          src="/assets/images/process_printing_hand.jpg"
+          alt="Hand block printing at the Dhyai studio"
+          loading="lazy"
+        >
+      </div>
+      <div class="two-col-text">
+        <span class="kicker">Process</span>
+        <div class="rule-h"></div>
+        <h2>Made by hand, released with restraint</h2>
+        <p>
+          Material selection is directed by structure and surface clarity.
+          Drawing establishes scale. Blocks are carved to preserve alignment.
+        </p>
+        <p>
+          Printing is executed by hand. Each surface is assessed in light before release.
+          Engraving follows defined measurement. Surface application is controlled.
+        </p>
+        <a href="/process.html" class="btn-enquire" style="margin-top:.5rem">View the process</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ The Metal Works ══ -->
+  <section class="section" style="padding-block:var(--section-y); border-top:1px solid rgba(237,227,204,.05)">
+    <div class="two-col reverse reveal">
+      <div class="two-col-text">
+        <span class="kicker">Metal</span>
+        <div class="rule-h"></div>
+        <h2>The Pebble Set</h2>
+        <p>
+          A pebble from a riverbed — held in the hand once, understood completely.
+          Two jars on a tray: one narrow, one wide. Hand-cast brass for the daily table.
+        </p>
+        <p>
+          The patina is the accumulation of every time the object was picked up.
+          A surface that records its own use.
+        </p>
+        <a href="/contact.html" class="btn-enquire" style="margin-top:.5rem">Enquire</a>
+      </div>
+      <div class="two-col-img">
+        <img
+          src="/assets/images/kalash_1.webp"
+          alt="Hand-cast brass Pebble Set by Dhyai"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Founder ══ -->
+  <section class="section" style="padding-block:var(--section-y); border-top:1px solid rgba(237,227,204,.05)">
+    <div class="two-col reveal">
+      <div class="two-col-img">
+        <img
+          src="/assets/images/founder.webp"
+          alt="Dhyai founder"
+          loading="lazy"
+        >
+      </div>
+      <div class="two-col-text">
+        <span class="kicker">About</span>
+        <div class="rule-h"></div>
+        <h2>A working studio in Bengaluru</h2>
+        <p>
+          The first Dhyai space operates as a working studio and concept store.
+          Studies are developed, printed, and reviewed within the same space
+          they are eventually shown.
+        </p>
+        <p>
+          Cotton is selected for surface clarity and printing response.
+          Weight and weave are matched to each study before production begins.
+        </p>
+        <a href="/about.html" class="btn-enquire" style="margin-top:.5rem">About Dhyai</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Enquire CTA ══ -->
+  <section style="padding:var(--section-y) var(--pad-x); text-align:center; border-top:1px solid rgba(237,227,204,.05)">
+    <div class="statement reveal">
+      <span class="kicker" style="margin-bottom:1.8rem">Made to order</span>
+      <h2 style="font-size:clamp(1.6rem,3.5vw,2.8rem); letter-spacing:.18em; margin-bottom:1.4rem">
+        All pieces are made to order<br>and delivered worldwide
+      </h2>
+      <p style="margin-bottom:2.5rem">
+        For enquiries about collections, custom dimensions, or the brass works,<br>
+        write to us directly.
+      </p>
+      <a href="/contact.html" class="btn-enquire" style="padding:1rem 3rem; font-size:10px; letter-spacing:.4em">
+        Enquire
+      </a>
+    </div>
+  </section>
+
+</Base>

@@ -1,0 +1,122 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  currentPage?: string;
+}
+
+const {
+  title,
+  description = 'Dhyai develops objects for long-term use. Block-printed textiles and hand-cast brass from Bengaluru, made to order.',
+  ogImage = '/assets/images/hero_jali_shadow.jpg',
+  ogUrl = '',
+  currentPage = '',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dhyai">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={`https://dhyai.studio${ogImage}`}>
+  {ogUrl && <meta property="og:url" content={`https://dhyai.studio${ogUrl}`}>}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1a1612">
+  <link rel="icon" href="/assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Display:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant:ital,wght@0,300;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <Nav currentPage={currentPage} />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+
+  <script>
+    // ── Nav scroll
+    const nav = document.getElementById('site-nav');
+    if (nav) {
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
+    }
+
+    // ── Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+    const links  = document.getElementById('nav-links') as HTMLElement | null;
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        const open = links.classList.toggle('open');
+        toggle.classList.toggle('open', open);
+        document.body.classList.toggle('nav-open', open);
+      });
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          links.classList.remove('open');
+          toggle.classList.remove('open');
+          document.body.classList.remove('nav-open');
+        });
+      });
+    }
+
+    // ── Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Product carousels
+    document.querySelectorAll('.product-carousel').forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track') as HTMLElement | null;
+      if (!track) return;
+      const dots = Array.from(carousel.querySelectorAll('.carousel-dot'));
+      const n = track.querySelectorAll('img').length;
+      if (n <= 1) return;
+
+      let cur = 0;
+      const go = (i: number) => {
+        cur = ((i % n) + n) % n;
+        track.style.transform = `translateX(-${cur * 100}%)`;
+        dots.forEach((d, j) => d.classList.toggle('on', j === cur));
+      };
+
+      let timer = setInterval(() => go(cur + 1), 3800);
+      dots.forEach((d, i) => d.addEventListener('click', () => {
+        clearInterval(timer);
+        go(i);
+        timer = setInterval(() => go(cur + 1), 3800);
+      }));
+
+      let sx = 0;
+      track.addEventListener('touchstart', (e: TouchEvent) => { sx = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', (e: TouchEvent) => {
+        const dx = sx - e.changedTouches[0].clientX;
+        if (Math.abs(dx) > 40) {
+          clearInterval(timer);
+          go(dx > 0 ? cur + 1 : cur - 1);
+          timer = setInterval(() => go(cur + 1), 3800);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

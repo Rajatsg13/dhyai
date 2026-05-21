@@ -1,0 +1,39 @@
+---
+interface Props {
+  currentPage?: string;
+}
+const { currentPage = '' } = Astro.props;
+const is = (p: string) => currentPage === p ? 'page' : undefined;
+---
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="nav-logo" href="/index.html" aria-label="Dhyai — Home">
+    <img src="/assets/images/wordmark.png" alt="Dhyai" width="120" height="28">
+  </a>
+
+  <ul class="nav-links" id="nav-links" role="list">
+    <li class="nav-dropdown">
+      <button class="dropdown-btn" aria-haspopup="true" aria-expanded="false">
+        Collections
+        <span class="dropdown-chevron" aria-hidden="true"></span>
+      </button>
+      <div class="dropdown-menu" role="menu">
+        <a href="/sthiti.html" role="menuitem" aria-current={currentPage === 'sthiti' ? 'page' : undefined}>Sthiti</a>
+        <a href="/sthna.html"  role="menuitem" aria-current={currentPage === 'sthna'  ? 'page' : undefined}>Sthana</a>
+        <a href="/punar.html"  role="menuitem" aria-current={currentPage === 'punar'  ? 'page' : undefined}>Punar</a>
+      </div>
+    </li>
+    <li>
+      <a class="nav-link" href="/about.html" aria-current={is('about')}>About</a>
+    </li>
+    <li>
+      <a class="nav-link" href="/process.html" aria-current={is('process')}>Process</a>
+    </li>
+    <li>
+      <a class="nav-link nav-cta" href="/contact.html" aria-current={is('contact')}>Enquire</a>
+    </li>
+  </ul>
+
+  <button class="nav-toggle" id="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
