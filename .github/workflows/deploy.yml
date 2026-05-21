@@ -24,6 +24,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           server-dir: ./
+          state-name: .ftp-deploy-sync-v4.json
           exclude: |
             **/.git*
             **/.git*/**
