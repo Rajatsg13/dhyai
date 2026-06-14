@@ -1,75 +1,39 @@
-/* DHYAI V3 — main.js */
+/* DHYAI V5 — main.js */
 (function(){
 
-  // ── Entry animation (index.html only) ──────────────────────────────────────
-  var entryEl = document.getElementById('entry');
-  if(entryEl){
-    document.body.style.overflow = 'hidden';
-    var slides = entryEl.querySelectorAll('.es'),
-        cur    = 0,
-        FADE   = 900,
-        done   = false;
-
-    function finish(){
-      if(done) return;
-      done = true;
-      document.body.style.overflow = '';
-      entryEl.classList.add('done');
-      setTimeout(function(){ entryEl.style.display = 'none'; }, 1200);
-    }
-
-    function nextSlide(){
-      if(cur >= slides.length){ finish(); return; }
-      slides[cur].classList.add('active');
-      var hold = parseInt(slides[cur].getAttribute('data-hold'), 10);
-      setTimeout(function(){
-        slides[cur].classList.remove('active');
-        cur++;
-        setTimeout(nextSlide, FADE);
-      }, hold);
-    }
-    setTimeout(nextSlide, 400);
-
-    // Skip on click or tap
-    entryEl.addEventListener('click', finish);
-    var skipBtn = entryEl.querySelector('.entry-skip');
-    if(skipBtn) skipBtn.addEventListener('click', function(e){ e.stopPropagation(); finish(); });
-  }
-
-  // ── Mobile nav toggle ──────────────────────────────────────────────────────
-  var navToggle = document.querySelector('[data-nav-toggle]');
-  var nav       = document.querySelector('[data-nav]');
-  if(navToggle && nav){
-    navToggle.addEventListener('click', function(){
-      var open = nav.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  // ── Mobile nav hamburger ─────────────────────────────────────────────────
+  var burg = document.getElementById('burg');
+  var nl   = document.getElementById('nl');
+  if(burg && nl){
+    burg.addEventListener('click', function(){
+      var open = nl.classList.toggle('open');
+      burg.classList.toggle('open', open);
+      burg.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-    document.addEventListener('click', function(e){
-      if(nav.classList.contains('is-open') && !e.target.closest('.site-header')){
-        nav.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-    nav.querySelectorAll('a').forEach(function(link){
-      link.addEventListener('click', function(){
-        nav.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
+    nl.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        nl.classList.remove('open');
+        burg.classList.remove('open');
+        burg.setAttribute('aria-expanded', 'false');
       });
     });
+    document.addEventListener('click', function(e){
+      if(nl.classList.contains('open') && !e.target.closest('#nav')){
+        nl.classList.remove('open');
+        burg.classList.remove('open');
+        burg.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 
-  // ── Active nav highlighting ────────────────────────────────────────────────
+  // ── Active nav link ──────────────────────────────────────────────────────
   var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  document.querySelectorAll('a[data-nav-link]').forEach(function(a){
-    if((a.getAttribute('href') || '').toLowerCase() === path)
-      a.setAttribute('aria-current', 'page');
-  });
-  document.querySelectorAll('a[data-subnav-link]').forEach(function(a){
-    if((a.getAttribute('href') || '').toLowerCase() === path)
-      a.setAttribute('aria-current', 'page');
+  if(nl) nl.querySelectorAll('a').forEach(function(a){
+    var href = (a.getAttribute('href') || '').toLowerCase().split('/').pop();
+    if(href === path) a.setAttribute('aria-current', 'page');
   });
 
-  // ── Cookie consent banner ──────────────────────────────────────────────────
+  // ── Cookie consent banner ────────────────────────────────────────────────
   if(!localStorage.getItem('dhyai_cookie_consent')){
     var banner = document.createElement('div');
     banner.className = 'cookie-banner';
@@ -83,30 +47,26 @@
       '</div>';
     document.body.appendChild(banner);
     requestAnimationFrame(function(){ banner.classList.add('is-visible'); });
-
     function dismiss(val){
       localStorage.setItem('dhyai_cookie_consent', val);
       banner.classList.remove('is-visible');
-      banner.addEventListener('transitionend', function(){ banner.remove(); }, {once: true});
+      banner.addEventListener('transitionend', function(){ banner.remove(); }, {once:true});
     }
     banner.querySelector('.btn-accept').addEventListener('click', function(){ dismiss('all'); });
     banner.querySelector('.btn-essential').addEventListener('click', function(){ dismiss('essential'); });
   }
 
-  // ── Scroll reveal ──────────────────────────────────────────────────────────
-  var revEls = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
+  // ── Scroll reveal (.fd → .lit) ───────────────────────────────────────────
+  var fdEls = document.querySelectorAll('.fd');
+  if('IntersectionObserver' in window && fdEls.length){
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('lit'); io.unobserve(e.target); }
       });
-    }, {threshold: 0.12});
-    revEls.forEach(function(el){ io.observe(el); });
+    }, {threshold: 0.1});
+    fdEls.forEach(function(el){ io.observe(el); });
   } else {
-    revEls.forEach(function(el){ el.classList.add('is-visible'); });
+    fdEls.forEach(function(el){ el.classList.add('lit'); });
   }
 
 })();

@@ -29,13 +29,15 @@ The site is split into two distinct implementations that share no CSS or JS:
 ### `index.html` (V4 — the homepage)
 Self-contained single file with extensive **inline `<style>` and inline `<script>`**. It does not load `assets/css/styles.css` or `assets/js/main.js`. Changes to those files have no effect on the homepage.
 
-Extended palette specific to index.html:
-- `--ink-2: #0a0806` (deep black — hero/video beds)
+Extended palette specific to index.html (differs from styles.css):
+- `--ink: #221d1a`, `--ink-2: #2c2622` (warm darks — hero/video beds)
+- `--mid-1: #4a4038`, `--mid-2: #726459` (mineral mids)
 - `--ivory: #f6efe2` (brightest surface — headings, product names)
-- `--warm: #221508` (dark amber — section accent gradients)
-- `--faint: #6a5e52` (differs from styles.css's `#524840`)
+- `--dim: #b7aa98` (secondary text — warmer than styles.css `#9A9080`)
+- `--faint: #726459` (tertiary — differs from styles.css `#524840`)
+- `--serif-h: 'Instrument Serif'` (additional heading font not used in V3)
 
-The V4 entry animation uses `data-s` attribute states (`0–3`) on `#entry` to cross-fade a jaali background image, controlled by inline JS. The nav uses `#nav` (not `.site-header`) and toggles `.on` class (not `.is-open`). Product carousels are driven by `setInterval`.
+The V4 entry animation: inline JS cycles `data-s` attribute (`0–3`) on `#entry` to drive CSS opacity transitions on `.bg-jaali` and `.bg-veil` layers; `.es` slide children toggle `.on` class (not `data-hold` — that's main.js's separate, unused pattern). The nav uses `#nav` (not `.site-header`) and toggles `.on` class (not `.is-open`). Product carousels are driven by `setInterval` with drag support.
 
 ### All other pages (V3)
 `about.html`, `process.html`, `studies.html`, `contact.html`, `sthna.html`, `sthiti.html`, `punar.html`, `404.html` — each loads `assets/css/styles.css` and `assets/js/main.js` at the bottom of `<body>`. All share identical nav markup.
@@ -61,7 +63,7 @@ Z-index layers: film grain overlay `3000`, cookie banner `1500`, header `1000`, 
 3. **Cookie consent banner** — injected once if `localStorage('dhyai_cookie_consent')` is absent; dismissed to `'all'` or `'essential'`.
 4. **Scroll-reveal** — `IntersectionObserver` on `.reveal` elements; adds `.is-visible` at 12% threshold. Grid children inside `.reveal` animate with staggered `transition-delay`.
 
-The `.es` / `data-hold` entry animation pattern in main.js is unused by the current site — the homepage (index.html V4) has its own inline animation.
+The `.es` / `data-hold` / `.active` entry animation block in main.js (lines 5–37) is dead code — no V3 page has an `#entry` element. The homepage (index.html V4) has its own separate inline JS animation using `data-s` states and `.on` class instead.
 
 ## Pages
 
@@ -70,6 +72,10 @@ The `.es` / `data-hold` entry animation pattern in main.js is unused by the curr
 - `404.html` — served via `.htaccess` (`ErrorDocument 404 /404.html`).
 - `dhyai_v4.html` — archived predecessor to the current index.html; not linked or deployed.
 - `dhyai_mobile.html` — untracked standalone prototype with its own inline styles; not part of the deployed site.
+
+## Untracked directories
+
+`node_modules/`, `dist/`, and `.astro/` are present locally but untracked by git — remnants of an abandoned Astro migration experiment. They are not part of the deployed site and have no effect on it. The `dist/` directory contains a compiled Astro build that mirrors the V3 pages but is not wired into the FTP deploy workflow.
 
 ## Contact form flow
 
