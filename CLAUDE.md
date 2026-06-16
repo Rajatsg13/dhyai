@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-DHYAI is a static HTML/CSS website for a luxury linen brand, deployed on Hostinger. No build step, no package manager, no framework — plain `.html` files served directly. The one dynamic piece is a PHP contact form backed by SMTP via PHPMailer.
+DHYAI is a static HTML/CSS website for a luxury linen and brass-objects brand, deployed on Hostinger. No build step, no package manager, no framework — plain `.html` files served directly. The one dynamic piece is a PHP contact form backed by SMTP via PHPMailer.
 
 ## Running locally
 
@@ -16,72 +16,82 @@ The contact form (`contact.html` → `contact.php`) requires a PHP server with S
 
 ## Deployment
 
-Pushes to `main` automatically deploy via `.github/workflows/deploy.yml` (FTP using `SamKirkland/FTP-Deploy-Action`). Required GitHub secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
+Pushes to `main` automatically deploy via `.github/workflows/deploy.yml` (FTPS using `SamKirkland/FTP-Deploy-Action`). Required GitHub secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
 
 Files excluded from deployment: `.git*`, `README.md`, `CLAUDE.md`. **`config.php` is deployed** — set `SMTP_PASSWORD` in it before pushing to main.
 
 For manual upload, copy folder contents (not the folder itself) into `public_html/` via Hostinger File Manager or FTP.
 
-## Critical architecture: two separate codebases in one repo
+## Architecture: V5 unified codebase
 
-The site is split into two distinct implementations that share no CSS or JS:
+All pages — including `index.html` — share a single stylesheet (`assets/css/styles.css`, 371 lines) and a single script (`assets/js/main.js`, 72 lines). There is no longer a separate inline-style homepage; the V3/V4 split described in older notes is gone.
 
-### `index.html` (V4 — the homepage)
-Self-contained single file with extensive **inline `<style>` and inline `<script>`**. It does not load `assets/css/styles.css` or `assets/js/main.js`. Changes to those files have no effect on the homepage.
+`process.html` is a redirect stub (`<meta http-equiv="refresh">`) pointing to `material.html` — it contains no styles or content.
 
-Extended palette specific to index.html (differs from styles.css):
-- `--ink: #221d1a`, `--ink-2: #2c2622` (warm darks — hero/video beds)
-- `--mid-1: #4a4038`, `--mid-2: #726459` (mineral mids)
-- `--ivory: #f6efe2` (brightest surface — headings, product names)
-- `--dim: #b7aa98` (secondary text — warmer than styles.css `#9A9080`)
-- `--faint: #726459` (tertiary — differs from styles.css `#524840`)
-- `--serif-h: 'Instrument Serif'` (additional heading font not used in V3)
+`dhyai_v4.html` is an archived predecessor, not linked or deployed.
 
-The V4 entry animation: inline JS cycles `data-s` attribute (`0–3`) on `#entry` to drive CSS opacity transitions on `.bg-jaali` and `.bg-veil` layers; `.es` slide children toggle `.on` class (not `data-hold` — that's main.js's separate, unused pattern). The nav uses `#nav` (not `.site-header`) and toggles `.on` class (not `.is-open`). Product carousels are driven by `setInterval` with drag support.
+## Styling (V5)
 
-### All other pages (V3)
-`about.html`, `process.html`, `studies.html`, `contact.html`, `sthna.html`, `sthiti.html`, `punar.html`, `404.html` — each loads `assets/css/styles.css` and `assets/js/main.js` at the bottom of `<body>`. All share identical nav markup.
+Design tokens in `:root`:
+- `--dark:#1a100a`, `--dark2:#241710`, `--brown:#2a170e` (dark beds)
+- `--warm2:#b49b78` (warm tan — studies/enquiry section backgrounds)
+- `--text:#f0e6d2`, `--muted:#d4c5a8`, `--dim:#ab9577` (text hierarchy)
+- `--brass:#be8233` (accent — labels, links)
+- `--serif:'Marcellus'` (display headings), `--body:'Petrona'` (body italic), `--sans:'Source Sans 3'` (UI/labels)
+- `--nav:72px`, `--pad:72px` (collapses to 40px at 1024px, 24px at 900px)
 
-## Styling (V3 pages)
+Layout helpers: `.w` (max-width 1120px, centered), `.pg` (page padding-top accounting for fixed nav). No card components — images sit directly on background.
 
-`assets/css/styles.css` (~648 lines). Design tokens:
+Z-index: cookie banner `1500`, nav `1000`.
 
-- `--ink: #1D1914`, `--cream: #EDE3CC`, `--dim: #9A9080`, `--faint: #524840`, `--ochre: #C4882A`
-- `--serif: 'Cormorant Display'` (headings), `--serif-b: 'Cormorant'` (italic body), `--sans: 'Jost'` (UI/labels)
-- `--header-h: 64px`, `--pad-x: 40px`, `--max-page: 1120px`, `--max-text: 680px`
-- Layout uses `.grid-2` / `.grid-3`; no cards, no boxed UI — images sit directly on background
-- Mobile breakpoints: `860px` (nav collapses), `980px` (grids stack), `760px` (footer/cookie), `640px` (form button full-width)
+Breakpoints: `1024px` (pad shrinks), `900px` (nav collapses, grids stack), `768px` (hero height), `600px` (single-column image grids).
 
-Z-index layers: film grain overlay `3000`, cookie banner `1500`, header `1000`, subnav `900`.
+## JavaScript (V5)
 
-## JavaScript (V3 pages)
+`assets/js/main.js` (vanilla IIFE, 72 lines):
 
-`assets/js/main.js` (vanilla IIFE, ~112 lines) handles:
+1. **Mobile nav** — targets `#burg` (hamburger button) and `#nl` (nav list); toggles `.open` class on both. Closes on outside click or nav link click.
+2. **Active nav highlighting** — matches `location.pathname` filename against `a[href]` in `#nl`; sets `aria-current="page"`.
+3. **Cookie consent** — injected if `localStorage('dhyai_cookie_consent')` absent; banner slides up via `.is-visible`; dismissed to `'all'` or `'essential'`.
+4. **Scroll-reveal** — `IntersectionObserver` on `.fd` elements; adds `.lit` at 10% threshold. Fallback: adds `.lit` immediately if no IO support.
 
-1. **Mobile nav toggle** — `[data-nav-toggle]` / `[data-nav]`; toggles `.is-open` and `aria-expanded`. Closes on outside click or any nav link click.
-2. **Active nav highlighting** — matches `location.pathname` against `[data-nav-link]` and `[data-subnav-link]` href attributes; sets `aria-current="page"`.
-3. **Cookie consent banner** — injected once if `localStorage('dhyai_cookie_consent')` is absent; dismissed to `'all'` or `'essential'`.
-4. **Scroll-reveal** — `IntersectionObserver` on `.reveal` elements; adds `.is-visible` at 12% threshold. Grid children inside `.reveal` animate with staggered `transition-delay`.
+## Nav markup (all pages)
 
-The `.es` / `data-hold` / `.active` entry animation block in main.js (lines 5–37) is dead code — no V3 page has an `#entry` element. The homepage (index.html V4) has its own separate inline JS animation using `data-s` states and `.on` class instead.
+```html
+<nav id="nav">
+  <button class="burg" id="burg" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nl" id="nl">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="about.html">STUDIO</a></li>
+    <li><a href="material.html">MATERIAL</a></li>
+    <li><a href="studies.html">STUDIES</a></li>
+    <li><a href="objects.html">OBJECTS</a></li>
+    <li><a href="contact.html">ENQUIRY</a></li>
+  </ul>
+</nav>
+```
 
 ## Pages
 
-- **Study detail pages** (`sthna.html`, `sthiti.html`, `punar.html`) share identical structure: cover image → description → format grid (`.format-list`). They include a `.subnav` with `[data-subnav-link]` for cross-navigation.
-- `overview.html` — quick-links review page, not in the main nav, useful for design QA.
-- `404.html` — served via `.htaccess` (`ErrorDocument 404 /404.html`).
-- `dhyai_v4.html` — archived predecessor to the current index.html; not linked or deployed.
-- `dhyai_mobile.html` — untracked standalone prototype with its own inline styles; not part of the deployed site.
+**Primary (in nav):** `index.html`, `about.html`, `material.html`, `studies.html`, `objects.html`, `contact.html`
 
-## Untracked directories
+**Study detail pages** (`sthna.html`, `sthiti.html`, `punar.html`) — identical structure: cover image → text + image grid. Background `var(--warm2)`. Each has its own `.ig-*` image grid class in styles.css.
 
-`node_modules/`, `dist/`, and `.astro/` are present locally but untracked by git — remnants of an abandoned Astro migration experiment. They are not part of the deployed site and have no effect on it. The `dist/` directory contains a compiled Astro build that mirrors the V3 pages but is not wired into the FTP deploy workflow.
+**Object detail pages** (`kalash.html`, `pebble.html`) — `.odp-page` layout with `.od-g` two-column grid (text left, image stack right).
+
+**Supporting:** `commissions.html` (dark overlay + two-column process layout), `404.html` (`.pg-center` fullscreen), `thank-you/index.html` (post-form redirect), `overview.html` (design QA quick-links, not in nav).
 
 ## Contact form flow
 
 `contact.html` → POST → `contact.php` → PHPMailer (SMTP) → redirect to `thank-you/` on success, or `contact.html?error=<code>` on failure.
 
-- SMTP config in `config.php` (constants: `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `MAIL_FROM`, `MAIL_TO`)
+- SMTP config in `config.php` (constants: `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `MAIL_FROM`, `MAIL_FROM_NAME`, `MAIL_TO`, `MAIL_TO_NAME`)
 - PHPMailer vendored in `lib/PHPMailer/src/` (no Composer)
-- Spam protection: two honeypot fields (`bot-field`, `company`) — if filled, returns fake success redirect
+- Spam protection: honeypot fields `bot-field` and `company` — if filled, returns fake success redirect
 - Error codes: `missing` (empty required fields), `email` (invalid email format), `send` (SMTP failure)
+
+## Untracked local directories
+
+`node_modules/`, `dist/`, `.astro/` — remnants of an abandoned Astro experiment. Not deployed, no effect on the site.

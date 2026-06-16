@@ -61,6 +61,9 @@ body{
 .pg{padding-top:calc(var(--nav) + 96px);padding-bottom:96px;}
 .lbl{font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);}
 .ph{font-family:var(--serif);font-size:clamp(32px,3.5vw,46px);letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-bottom:12px;}
+.cap{font-family:var(--sans);font-size:11px;letter-spacing:.09em;color:var(--dim);margin-top:6px;}
+.capd{font-family:var(--sans);font-size:11px;letter-spacing:.09em;color:rgba(42,23,14,.5);margin-top:6px;}
+.si-lbl-lg{font-size:18px;}
 .back{
   display:inline-block;margin-top:28px;
   font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
@@ -138,10 +141,10 @@ body{
 .pb_{font-family:var(--body);font-size:19px;color:var(--muted);line-height:1.75;}
 
 #qt{position:relative;min-height:600px;overflow:hidden;display:flex;align-items:center;}
-#qt img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.15) saturate(.9);}
+#qt img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.25) saturate(1.05);}
 #qt .ov{
   position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(26,16,10,.18) 0%,rgba(26,16,10,.04) 45%,rgba(26,16,10,.12) 100%);
+  background:linear-gradient(to bottom,rgba(26,16,10,.38) 0%,rgba(26,16,10,.18) 55%,rgba(180,155,120,.55) 100%);
 }
 #qt .qi{position:relative;z-index:2;width:100%;padding:80px var(--pad);}
 .q1{font-family:var(--body);font-style:italic;font-size:clamp(14px,1.3vw,17px);line-height:1.8;color:rgba(240,230,210,.75);max-width:360px;margin-left:8%;margin-bottom:56px;}
@@ -188,6 +191,7 @@ body{
 .mat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .mat-row img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
 .mat-wide img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+.mat-cont img{width:100%;display:block;object-fit:contain;background:#221610;}
 .mat-div{border:none;border-top:1px solid rgba(232,220,198,.18);margin:0 0 56px;}
 
 /* ══ STUDIES LANDING ═════════════════════════════════════════ */
