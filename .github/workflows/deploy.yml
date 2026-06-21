@@ -25,11 +25,12 @@ jobs:
           set ftp:ssl-protect-data true
           set ssl:verify-certificate false
           set ftp:passive-mode true
-          set net:timeout 60
-          set net:max-retries 5
-          set net:reconnect-interval-base 5
+          set net:timeout 120
+          set net:max-retries 10
+          set net:reconnect-interval-base 10
+          set net:reconnect-interval-max 60
           open -u "$FTP_USERNAME,$FTP_PASSWORD" "$FTP_SERVER"
-          mirror --reverse --delete --parallel=4 --verbose \
+          mirror --reverse --delete --parallel=2 --verbose \
             --exclude-glob .git* \
             --exclude-glob README.md \
             --exclude-glob CLAUDE.md \
