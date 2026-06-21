@@ -16,15 +16,17 @@ The contact form (`contact.html` → `contact.php`) requires a PHP server with S
 
 ## Deployment
 
-Pushes to `main` automatically deploy via `.github/workflows/deploy.yml` (FTPS using `SamKirkland/FTP-Deploy-Action`). Required GitHub secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
+Pushes to `main` automatically deploy via `.github/workflows/deploy.yml` (FTPS using `lftp`). Required GitHub secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
 
-Files excluded from deployment: `.git*`, `README.md`, `CLAUDE.md`. **`config.php` is deployed** — set `SMTP_PASSWORD` in it before pushing to main.
+Files excluded from deployment: `.git*`, `README.md`, `CLAUDE.md`, `node_modules`, `dist`, `.astro`, `.DS_Store`. **`config.php` is deployed** — set `SMTP_PASSWORD` in it before pushing to main.
 
 For manual upload, copy folder contents (not the folder itself) into `public_html/` via Hostinger File Manager or FTP.
 
 ## Architecture: V5 unified codebase
 
-All pages — including `index.html` — share a single stylesheet (`assets/css/styles.css`, 371 lines) and a single script (`assets/js/main.js`, 72 lines). There is no longer a separate inline-style homepage; the V3/V4 split described in older notes is gone.
+All pages — including `index.html` — share a single stylesheet (`assets/css/styles.css`) and a single script (`assets/js/main.js`). There is no longer a separate inline-style homepage; the V3/V4 split described in older notes is gone.
+
+Every page `<head>` loads three Google Fonts via CDN: `Marcellus`, `Petrona` (300 weight, italic variant), and `Source Sans 3` (300/400/600). Copy this block verbatim when creating a new page.
 
 `process.html` is a redirect stub (`<meta http-equiv="refresh">`) pointing to `material.html` — it contains no styles or content.
 
@@ -92,6 +94,12 @@ Breakpoints: `1024px` (pad shrinks), `900px` (nav collapses, grids stack), `768p
 - Spam protection: honeypot fields `bot-field` and `company` — if filled, returns fake success redirect
 - Error codes: `missing` (empty required fields), `email` (invalid email format), `send` (SMTP failure)
 
-## Untracked local directories
+## .htaccess
 
-`node_modules/`, `dist/`, `.astro/` — remnants of an abandoned Astro experiment. Not deployed, no effect on the site.
+Single line: `ErrorDocument 404 /404.html`. Nothing else — no rewrites, no redirects beyond the `process.html` meta-refresh stub.
+
+## Untracked / archived files
+
+- `node_modules/`, `dist/`, `.astro/` — remnants of an abandoned Astro experiment. Not deployed, no effect on the site.
+- `assets/brick.mp4`, `assets/kriya.mp4` — video assets referenced only in `dhyai_v4.html` (archived). Not used in any live page.
+- `dhyai_mobile.html` — local prototype, not tracked or deployed.
