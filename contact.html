@@ -8,7 +8,7 @@
 <title>Enquiry — Dhyai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Petrona:ital,wght@0,300;1,300&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lora:ital,wght@0,400;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
@@ -23,7 +23,7 @@
     <li><a href="material.html">MATERIAL</a></li>
     <li><a href="studies.html">STUDIES</a></li>
     <li><a href="objects.html">OBJECTS</a></li>
-    <li><a href="contact.html">ENQUIRY</a></li>
+    <li><a href="commissions.html">COMMISSIONS →</a></li>    <li><a href="contact.html">ENQUIRY</a></li>
   </ul>
 </nav>
 
@@ -50,15 +50,16 @@
       </div>
       <div class="fd">
         <div id="form-error" style="display:none;"></div>
-        <form class="ef" action="contact.php" method="POST">
+        <form class="ef" id="dhyai-contact-form">
           <input type="text" name="name" placeholder="Name" required>
           <input type="email" name="email" placeholder="Email" required>
           <input type="text" name="subject" placeholder="Subject">
           <textarea name="message" placeholder="Message" required></textarea>
-          <!-- Honeypot fields -->
-          <input type="text" name="bot-field" style="display:none;" tabindex="-1" autocomplete="off">
-          <input type="text" name="company" style="display:none;" tabindex="-1" autocomplete="off">
-          <button type="submit">SUBMIT</button>
+          <!-- Honeypot — off-screen rather than type="hidden" so bots that skip
+               hidden inputs still fill it. Web3Forms rejects anything with it set. -->
+          <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true"
+            style="position:absolute;width:1px;height:1px;left:-9999px;opacity:0;">
+          <button type="submit" id="dhyai-submit-btn">SUBMIT</button>
         </form>
       </div>
     </div>
@@ -70,20 +71,46 @@
   <p>Dhyai Studio · Devanahalli, Bengaluru</p>
 </footer>
 
+<script src="assets/js/web3forms.js"></script>
 <script>
 (function(){
-  var p = new URLSearchParams(location.search);
-  var code = p.get('error');
-  if(!code) return;
-  var msgs = {
-    missing: 'Please fill in all required fields.',
-    email: 'Please enter a valid email address.',
-    send: 'Something went wrong sending your message. Please try again or email us directly.'
-  };
-  var el = document.getElementById('form-error');
-  el.textContent = msgs[code] || 'An error occurred. Please try again.';
-  el.className = 'err-note';
-  el.style.display = 'block';
+  var form = document.getElementById('dhyai-contact-form');
+  var btn = document.getElementById('dhyai-submit-btn');
+  var errEl = document.getElementById('form-error');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(btn.disabled) return;
+
+    var data = new FormData(form);
+    var name = (data.get('name') || '').toString().trim();
+    var email = (data.get('email') || '').toString().trim();
+    var subject = (data.get('subject') || '').toString().trim();
+    var message = (data.get('message') || '').toString().trim();
+    var botcheck = (data.get('botcheck') || '').toString();
+
+    errEl.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'SENDING…';
+
+    dhyaiSubmitToWeb3Forms({
+      subject: subject || 'DHYAI Studio Enquiry',
+      from_name: 'DHYAI Studio Enquiry',
+      name: name,
+      email: email,
+      message: message,
+      botcheck: botcheck
+    }).then(function(){
+      window.location.href = 'thank-you/';
+    }).catch(function(err){
+      btn.disabled = false;
+      btn.textContent = 'SUBMIT';
+      errEl.textContent = dhyaiWeb3FormsFriendlyError(err);
+      errEl.className = 'err-note';
+      errEl.style.display = 'block';
+    });
+  });
 })();
 </script>
 <script src="assets/js/main.js"></script>
